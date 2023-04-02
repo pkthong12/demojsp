@@ -125,19 +125,19 @@ public class AccountDAO extends DBcontext {
 
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
         }
         return false;
     }
 
-    public void createCarts(String user) {
+    public int createCarts(String user) {
         String sql = "SELECT ID FROM db_web.account WHERE Username = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
-            int id;
+            int id=0;
             if (rs.next()) {
                 id = rs.getInt("id");
                 String sql1 = "INSERT INTO `db_web`.carts (`AccountID`,`Spvsl`) VALUES (?,?)";
@@ -146,8 +146,10 @@ public class AccountDAO extends DBcontext {
                 ps1.setString(2, ",0:0");
                 ps1.executeUpdate();
             }
-        } catch (Exception e) {
+            return id;
+        } catch (SQLException e) {
         }
+        return 0;
     }
 
     //
@@ -206,7 +208,7 @@ public class AccountDAO extends DBcontext {
             st.executeUpdate();
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return false;
     }
@@ -221,7 +223,7 @@ public class AccountDAO extends DBcontext {
             st.setInt(2, id);
             st.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
 
@@ -234,7 +236,7 @@ public class AccountDAO extends DBcontext {
             st = connection.prepareStatement(sql1);
             st.executeUpdate();
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return false;
     }

@@ -19,6 +19,7 @@
               href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
               />
         <script type="text/javascript" src="js/mdb.min.js"></script>
+        
         <!-- Custom scripts -->
         <script type="text/javascript"></script>
         <!-- MDB -->
@@ -58,13 +59,13 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">TIN TỨC</a>
+                                <a class="nav-link" href="news.jsp">TIN TỨC</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">GIỚI THIỆU</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">LIÊN HỆ</a>
+                                <a class="nav-link" href="tickets.jsp">HỖ TRỢ</a>
                             </li>
                         </ul>
                         <!-- Left links -->

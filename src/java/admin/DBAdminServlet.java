@@ -8,6 +8,7 @@ package admin;
 import dal.AccountDAO;
 import dal.BookDAO;
 import dal.OrderDAO;
+import dal.WebDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Account;
 import model.Book;
+import model.HistoryWeb;
 import model.OrderCart;
 
 /**
@@ -63,12 +65,16 @@ public class DBAdminServlet extends HttpServlet {
         BookDAO bdao = new  BookDAO();
         AccountDAO acdao = new  AccountDAO();
         OrderDAO odao = new OrderDAO();
+        WebDAO wdao = new WebDAO();
+        
         List<Account> listacc = acdao.getALL();
         List<Book> listbook = bdao.getALL();
         List<OrderCart> listorder = odao.getAllOrderForAdmin();
+        List<HistoryWeb> listhistory = wdao.getHistory();
         request.setAttribute("sluser", listacc.size());
         request.setAttribute("slbook", listbook.size());
         request.setAttribute("slorder", listorder.size());
+        request.setAttribute("history", listhistory);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     } 
 

@@ -89,11 +89,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("account", acc);
                 BookDAO bk = new BookDAO();
                 List<Carts> carts = bk.getBookByCarts(acc.getId());
-                if (carts == null) {
-                    session.setAttribute("giohang", null);
-                } else {
-                    session.setAttribute("giohang", carts);
-                }
+                session.setAttribute("giohang", carts);
                 response.sendRedirect("index");
             }
 

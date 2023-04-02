@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.WebDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -62,13 +63,14 @@ public class SignupServlet extends HttpServlet {
             Account a = acdao.checkExitsAcc(user, email);
             if(a==null){
                 if(acdao.signup(user, pass,hoten,"","", email,"3","1")){
-                    acdao.createCarts(user);
+                    int id = acdao.createCarts(user);
                     noti ="Đăng kí thành công, vui lòng đăng nhập";
+                    WebDAO wdao = new WebDAO();
+                    wdao.addHistory(id, "Đã tạo tài khoản "+user);
                 }
                 else{
                     noti ="Đăng kí thất bại, vui lòng thử lại";
                 }
-                
             }else{
                 noti ="User hoặc email đã tồn tại!";
             }

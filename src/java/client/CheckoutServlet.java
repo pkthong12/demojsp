@@ -6,6 +6,7 @@ package client;
 
 import dal.BookDAO;
 import dal.OrderDAO;
+import dal.WebDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,6 +23,7 @@ import java.util.Map;
 import static java.util.Map.entry;
 import model.Account;
 import model.Book;
+import model.Carts;
 import model.Discount;
 
 /**
@@ -136,6 +138,9 @@ public class CheckoutServlet extends HttpServlet {
 
             if (ordao.doCheckout(ten, phone, accId, total, diachi, giamgia, dateString, email, method, totalfirst, phiship)) {
                 int ID = ordao.getOrderID(accId, dateString);
+                WebDAO wdao = new WebDAO();
+                String user = ((Account) session.getAttribute("account")).getUsername();
+                wdao.addHistory(accId,user+ " đã tạo đơn hàng "+"#"+ID);
                 for (Map.Entry<Book, Integer> i : out.entrySet()) {
                     Book bk = i.getKey();
                     int sl = i.getValue();
@@ -144,9 +149,14 @@ public class CheckoutServlet extends HttpServlet {
                     BookDAO bdao = new BookDAO();
                     bdao.removetoCarts(bk.getId(), accId);
                 }
+                session.removeAttribute("giohang");
+                BookDAO bk = new BookDAO();
+                List<Carts> carts = bk.getBookByCarts(accId);
+                session.setAttribute("giohang", carts);
                 response.sendRedirect("success.jsp");
+                
             }
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException e) {
 
         }
 

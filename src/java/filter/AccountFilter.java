@@ -4,6 +4,7 @@
  */
 package filter;
 
+import dal.AccountDAO;
 import dal.BookDAO;
 import dal.CategoryDAO;
 import dal.WebDAO;
@@ -124,6 +125,7 @@ public class AccountFilter implements Filter {
         if (session.getAttribute("account") == null) {
             res.sendRedirect("login");
         }
+
         WebDAO wdao = new WebDAO();
         List<MethodPayment> listmethod = wdao.getMethod();
         session.setAttribute("listmethod", listmethod);

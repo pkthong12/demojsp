@@ -22,7 +22,7 @@
     </head>
     <body>
         <%@include file="/pages/navbar.jsp" %>
-
+        <c:set var="book" value="${requestScope.book}"></c:set>
         <form action="add" method="post">
             <section class="py-5">
                 <a  style="text-decoration: none;" href="index">

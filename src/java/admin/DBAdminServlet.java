@@ -71,9 +71,16 @@ public class DBAdminServlet extends HttpServlet {
         List<Book> listbook = bdao.getALL();
         List<OrderCart> listorder = odao.getAllOrderForAdmin();
         List<HistoryWeb> listhistory = wdao.getHistory();
+        int slPending =0;
+        for (OrderCart stt : listorder) {
+            if(stt.getStatus().getID() ==1){
+                slPending++;
+            }
+        }
         request.setAttribute("sluser", listacc.size());
         request.setAttribute("slbook", listbook.size());
         request.setAttribute("slorder", listorder.size());
+        request.setAttribute("slorderPending", slPending);
         request.setAttribute("history", listhistory);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     } 

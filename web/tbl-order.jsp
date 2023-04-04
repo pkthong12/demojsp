@@ -60,12 +60,14 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Đơn hàng</h1>
+
                         </div>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
+
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -87,18 +89,17 @@
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
-                                        <tbody>
+                                        <tbody >
                                             <c:forEach items="${requestScope.listorder}" var="order">
-                                                <tr>
+                                                <tr class="item">
                                                     <td>${order.ID}</td>
                                                     <td>${order.hoten}</td>
                                                     <td>${order.phone}</td>
                                                     <td><fmt:formatNumber pattern="###,###" value="${order.total}"/>đ</td>
-                                                    <td>${order.status.mota}</td>
+                                                    <td id="stt${order.status.ID}">${order.status.mota}</td>
                                                     <td style="text-align: center;"><a href="update-order?order=${order.ID}"><i class='fas fa-eye' style='font-size:30px'></i></td>
                                                 </tr>
                                             </c:forEach>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -147,7 +148,6 @@
 
         <!-- Page level custom scripts -->
         <script src="js/demo/datatables-demo.js"></script>
-
     </body>
 
 </html>

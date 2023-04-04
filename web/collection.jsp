@@ -208,7 +208,7 @@
                         <h1 id="noti" style="<c:if test="${ requestScope.listbookID.size()!=0}">display: none </c:if>">Không có kết quả nào</h1>
                         
                         
-                        <c:if test="${ requestScope.listbookID.size()!=0}">
+                        <c:if test="${requestScope.listbookID.size()!=0}">
                             
                             <c:forEach items="${requestScope.listbookID}" var="book">
 

@@ -230,8 +230,11 @@ public class AccountDAO extends DBcontext {
     public Boolean deleteAccount(int id) {
         String sql = "DELETE FROM db_web.carts WHERE AccountID = "+id;
         String sql1 = "DELETE FROM db_web.account WHERE ID = "+id;
+        String sql2 = "DELETE FROM db_web.history_web WHERE AccountID = "+id;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.executeUpdate();
+            st = connection.prepareStatement(sql2);
             st.executeUpdate();
             st = connection.prepareStatement(sql1);
             st.executeUpdate();

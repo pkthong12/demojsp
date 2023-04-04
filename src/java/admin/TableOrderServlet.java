@@ -59,7 +59,7 @@ public class TableOrderServlet extends HttpServlet {
         OrderDAO odao = new OrderDAO();
         List<OrderCart> listorder = odao.getAllOrderForAdmin();
         if(listorder == null){
-            response.sendRedirect("newjsp.jsp");
+            response.sendRedirect("404.jsp");
         }
         request.setAttribute("listorder", listorder);
         request.getRequestDispatcher("tbl-order.jsp").forward(request, response);

@@ -7,6 +7,7 @@ package admin;
 import dal.AccountDAO;
 import dal.BookDAO;
 import dal.CategoryDAO;
+import dal.WebDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -112,15 +113,22 @@ public class EditProductServlet extends HttpServlet {
             double price = Double.parseDouble(price_raw);
             double trongluong = Double.parseDouble(trongluong_raw);
             BookDAO bookdao = new BookDAO();
+            String str ="";
             if ("add".equals(idcheck)) {
                 bookdao.addBook(tensach, tacgia, trongluong, price, giamgia, dinhdang, category, soluong, stt, img);
+                str =" đã thêm sách mới "+tensach;
             }
             if ("edit".equals(idcheck)) {
                 int id = Integer.parseInt(id_raw);
                 bookdao.updateBook(tensach, tacgia, trongluong, price, giamgia, dinhdang, category, soluong, stt, id, img);
-
+                str =" đã cập nhật thông tin sách "+tensach;
             }
+
             HttpSession session = request.getSession();
+            int accId = ((Account) session.getAttribute("account")).getId();
+            WebDAO wdao = new WebDAO();
+            String user = ((Account) session.getAttribute("account")).getUsername();
+            wdao.addHistory(accId, user + str);
             List<Book> listBook = bookdao.getALL();
             session.removeAttribute("listBook");
             session.setAttribute("listBook", listBook);

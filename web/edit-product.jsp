@@ -213,7 +213,7 @@
                                     <div class="col-sm-10 col-sm-offset-2">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <c:if test="${requestScope.idcheck != 'add'}">
-                                            <button type="button" onclick="dodelete('${requestScope.book.id}')" class="btn btn-danger">Delete</button>
+                                            <button <c:if test="${sessionScope.account.role =='2'}"> disabled="" </c:if> type="button" onclick="dodelete('${requestScope.book.id}')" class="btn btn-danger">Delete</button>
                                         </c:if>
                                         <button type="reset" class="btn btn-default"><a href="tbl-user">Cancel</a></button>
                                     </div>

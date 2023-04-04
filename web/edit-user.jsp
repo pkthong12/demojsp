@@ -154,7 +154,7 @@
                                         <input  name="email" required="" value="${requestScope.acc.email}" type="email" class="form-control">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                        <div style="<c:if test="${sessionScope.account.role =='2'}"> display: none </c:if>" class="form-group">
                                     <label class="col-sm-2 control-label">Quyền</label>
                                     <div class="col-sm-10">
                                         <select name="role" class="form-control">
@@ -207,7 +207,7 @@
                                     <div class="col-sm-10 col-sm-offset-2">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <c:if test="${requestScope.idcheck != 'add'}">
-                                            <button type="button" onclick="dodelete('${requestScope.acc.id}')" class="btn btn-danger">Delete</button>
+                                            <button <c:if test="${sessionScope.account.role =='2'}"> disabled="" </c:if> type="button" onclick="dodelete('${requestScope.acc.id}')" class="btn btn-danger">Delete</button>
                                         </c:if>
 
                                         <button type="reset" class="btn btn-default"><a href="tbl-user">Cancel</a></button>

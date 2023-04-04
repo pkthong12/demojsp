@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,7 +44,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                   aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Danh mục</span>
                 </a>
@@ -57,12 +58,13 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="configsweb.jsp">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Cấu hình web</span></a>
-            </li>
-
+            <c:if test="${sessionScope.account.role == '1'}">
+                <li class="nav-item">
+                    <a class="nav-link" href="configs">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Cấu hình web</span></a>
+                </li>
+            </c:if>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

@@ -11,10 +11,13 @@ import dal.WebDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,8 +29,11 @@ import model.Book;
  *
  * @author ThinkPad X1 G4
  */
+@MultipartConfig
 public class EditProductServlet extends HttpServlet {
 
+    private static final String SAVE_DIR = "img/img-product/";
+    private static String img = "";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -94,6 +100,7 @@ public class EditProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String idcheck = request.getParameter("idcheck");
         String id_raw = request.getParameter("id");
         String tensach = request.getParameter("tensach");
@@ -105,7 +112,6 @@ public class EditProductServlet extends HttpServlet {
         String category_raw = request.getParameter("category");
         String soluong_raw = request.getParameter("soluong");
         String stt_raw = request.getParameter("stt");
-        String img = request.getParameter("img");
         try {
             int category = Integer.parseInt(category_raw);
             int soluong = Integer.parseInt(soluong_raw);
@@ -113,15 +119,44 @@ public class EditProductServlet extends HttpServlet {
             double price = Double.parseDouble(price_raw);
             double trongluong = Double.parseDouble(trongluong_raw);
             BookDAO bookdao = new BookDAO();
-            String str ="";
+            String str = "";
             if ("add".equals(idcheck)) {
+                Part part =  request.getPart("file");
+                String fileName = extractFileName(part);
+                // refines the fileName in case it is an absolute path
+                fileName = new File(fileName).getName();
+                String appPath = request.getServletContext().getRealPath("");
+                String savePath = appPath + File.separator + SAVE_DIR;
+
+                // creates the save directory if it does not exists
+                File fileSaveDir = new File(savePath);
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdir();
+                }
+                img = SAVE_DIR +renameFile(fileName);
+                part.write(savePath + File.separator + renameFile(fileName));
+
                 bookdao.addBook(tensach, tacgia, trongluong, price, giamgia, dinhdang, category, soluong, stt, img);
-                str =" đã thêm sách mới "+tensach;
+                str = " đã thêm sách mới " + tensach;
             }
             if ("edit".equals(idcheck)) {
                 int id = Integer.parseInt(id_raw);
+                Part part =  request.getPart("file");
+                String fileName = extractFileName(part);
+                // refines the fileName in case it is an absolute path
+                fileName = new File(fileName).getName();
+                String appPath = request.getServletContext().getRealPath("");
+                String savePath = appPath + File.separator + SAVE_DIR;
+
+                // creates the save directory if it does not exists
+                File fileSaveDir = new File(savePath);
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdir();
+                }
+                
+                part.write(savePath + File.separator + renameFile(fileName));
                 bookdao.updateBook(tensach, tacgia, trongluong, price, giamgia, dinhdang, category, soluong, stt, id, img);
-                str =" đã cập nhật thông tin sách "+tensach;
+                str = " đã cập nhật thông tin sách " + tensach;
             }
 
             HttpSession session = request.getSession();
@@ -134,8 +169,35 @@ public class EditProductServlet extends HttpServlet {
             session.setAttribute("listBook", listBook);
             response.sendRedirect("tbl-product");
 
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException e) {
         }
+    }
+
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return "";
+    }
+
+    public static String renameFile(String fileName) {
+        String[] arrImg = fileName.split("\\.");
+        String duoiFileImg = arrImg[arrImg.length - 1];
+        String nameFile = "";
+        for (int i = 0; i < (arrImg.length - 1); i++) {
+            if (i == 0) {
+                nameFile = arrImg[i];
+            } else {
+                nameFile += "-" + arrImg[i];
+            }
+        }
+        nameFile = nameFile + "-" + System.nanoTime() + "." + duoiFileImg;
+        img = SAVE_DIR + nameFile.replace("_", "-");
+        return nameFile.replace("_", "-");
     }
 
     /**

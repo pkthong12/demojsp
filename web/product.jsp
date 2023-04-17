@@ -19,22 +19,25 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
     </head>
     <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=308936717220243&autoLogAppEvents=1" nonce="IAl5ngUV"></script>
         <%@include file="/pages/navbar.jsp" %>
         <c:set var="book" value="${requestScope.book}"></c:set>
-        <form action="add" method="post">
-            <section class="py-5">
-                <a  style="text-decoration: none;" href="index">
-                    <h6 style="margin-left: 13%"><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
-                </a>
-                <div class="container px-4 px-lg-5 my-5">
-                    <div class="row gx-4 gx-lg-5 align-items-center">
+            <form action="add" method="post">
+                <section class="py-5">
+                    <a  style="text-decoration: none;" href="index">
+                        <h6 style="margin-left: 13%"><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
+                    </a>
+                    <div class="container px-4 px-lg-5 my-5">
+                        <div class="row gx-4 gx-lg-5 align-items-center">
 
-                        <div class="col-md-6">
+                            <div class="col-md-6">
 
-                            <center class="the ">
-                                <div class="badge bg-dark text-white position-absolute" style="margin: 1%;">-${book.giamgia}%</div>
+                                <center class="the ">
+                                    <div class="badge bg-dark text-white position-absolute" style="margin: 1%;">-${book.giamgia}%</div>
                                 <img class="card-img-top mb-5 mb-md-0" src="${book.img}" alt="..." style="
                                      height: 8%;
                                      width: 70%;">
@@ -69,109 +72,61 @@
                 </div>
             </section>
         </form>
-        <!-- Related items section-->
+
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4">Related products</h2>
+                <h2 class="fw-bolder mb-4">Bình luận</h2>
+                <div  class="fb-comments" data-href="https://www.facebook.com/permalink.php?story_fbid=3350950245221293&id=100084687950939&substory_index=3350950245221293"  data-numposts="5"></div>
+            </div>
+        </section>
+        <!-- Related items section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4"> Sách liên quan</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
+                    <c:set var="i" value="0"></c:set>
+                    <c:forEach items="${sessionScope.listBook}" var="cc">
+                        <c:if test="${cc.category.id ==book.category.id && i<4}">
+                            <c:set var="i" value="${i+1}"></c:set>
+                                <div class="col mb-5">
+                                    <a href="product?id=${cc.id}">
+                                    <div class="card h-100">
+                                        <!-- Sale badge-->
+                                        <c:if test="${cc.soluong <=2}">
+                                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Hết hàng</div>
+                                        </c:if>
+                                        <c:if test="${cc.stt ==3}">
+                                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Đặt trước</div>
+                                        </c:if>
+                                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">-${cc.giamgia}%</div>
+                                        <!-- Product image-->
+                                        <img style="height: 260px;" class="card-img-top" src="${cc.img}" alt="..." />
+                                        <!-- Product details-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- Product name-->
+                                                <h5 style="display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;" class="fw-bolder">${cc.tensach}</h5>
+                                                <!-- Product reviews-->
+                                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                </div>
+                                                <!-- Product price-->
+                                                <span class="text-muted text-decoration-line-through"><fmt:formatNumber pattern="###,###" value="${cc.giaban}"/>₫</span>
+                                                <fmt:formatNumber pattern="###,###" value="${cc.giaban - cc.giaban*cc.giamgia/100}"/>₫
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
+                                </a>
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
+                        </c:if>
+                    </c:forEach>
                 </div>
             </div>
         </section>

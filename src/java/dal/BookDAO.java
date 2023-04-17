@@ -266,7 +266,13 @@ public class BookDAO extends DBcontext {
             ps.setString(7, giamgia);
             ps.setInt(8, stt);
             ps.setInt(9, soluong);
-            ps.setString(10, img);
+            if("".equals(img)){
+                ps.setString(10, "Image");
+            }
+            else{
+                ps.setString(10, img);
+            }
+            
             ps.executeUpdate();
 
             return sql;

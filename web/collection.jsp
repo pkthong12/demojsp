@@ -204,12 +204,12 @@
                 <div class="col">
                     <div class="row">
                         <h4 style="margin-bottom: 3%">${requestScope.loai}</h4>
-                        
+
                         <h1 id="noti" style="<c:if test="${ requestScope.listbookID.size()!=0}">display: none </c:if>">Không có kết quả nào</h1>
-                        
-                        
+
+
                         <c:if test="${requestScope.listbookID.size()!=0}">
-                            
+
                             <c:forEach items="${requestScope.listbookID}" var="book">
 
                                 <div  style="margin-bottom: 5%;" class="col-12 col-md-6 col-lg-4 item">
@@ -236,26 +236,25 @@
                                     </a>
                                 </div>
                             </c:forEach>
-                            <div class="col-12">
-                                <nav aria-label="...">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item active">
-                                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
                         </c:if>
 
-
+                        <div class="col-12">
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
 
                     </div>
                 </div>
@@ -319,10 +318,10 @@
                     }
                     if (count === 0) {
                         noti.style.display = "block";
-                    }else{
+                    } else {
                         noti.style.display = "none";
                     }
-                } 
+                }
 
             }
         </script>

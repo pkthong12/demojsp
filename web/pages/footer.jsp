@@ -205,7 +205,7 @@
     </head>
     <body>
         <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=308936717220243&autoLogAppEvents=1" nonce="ZOXUagts"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=308936717220243&autoLogAppEvents=1" nonce="ZOXUagts"></script>
         <footer class="footer-distributed">
 
             <div class="footer-left">
@@ -246,7 +246,7 @@
 
             <div class="footer-right">
 
-                <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100084687950939" data-tabs="timeline" data-width="" data-height="70" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/profile.php?id=100084687950939" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100084687950939">Phùng Kim Thông</a></blockquote></div>
+                <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100084687950939" data-tabs="timeline" data-width="300" data-height="70" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/profile.php?id=100084687950939" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100084687950939">Phùng Kim Thông</a></blockquote></div>
 
                 <div class="footer-icons">
 

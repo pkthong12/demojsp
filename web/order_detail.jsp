@@ -33,11 +33,11 @@
 
         <section  class="py-5">
             <div class="container">
-                <a href="index">
+                <a href="my-order">
                     <small ><i class='fa fa-long-arrow-left' ></i>&nbsp;Trở lại lịch sử</small>
                 </a>
 
-                <h2>Đơn hàng: ${requestScope.order.ID}</h2>
+                <h2>Đơn hàng: ĐB-${requestScope.order.ID}</h2>
                 <small>Ngày: ${requestScope.order.thoigian}</small>
                 <table style="margin-top: 1%;" class="table table-bordered">
                     <thead>
@@ -68,7 +68,7 @@
                             <td colspan="3">Phí ship</td>
                             <td><fmt:formatNumber pattern="###,###" value="${requestScope.order.phiship}"/>đ</td>
                         </tr>
-                       
+
                         <tr>
                             <td colspan="3">Tạm tính</td>
                             <td><fmt:formatNumber pattern="###,###" value="${requestScope.order.totalFirst}"/>đ</td>
@@ -77,8 +77,8 @@
                             <td colspan="3">Giảm giá</td>
                             <td>${requestScope.order.giamgia}%</td>
                         </tr>
-                         <tr>
-                             
+                        <tr>
+
                             <td>Địa chỉ nhận hàng</td>
                             <td colspan="3">${requestScope.order.diachi}</td>
 
@@ -88,6 +88,23 @@
                             <td colspan="3">${requestScope.order.status.mota}</td>
                         </tr>
                     </tbody>
+                </table>
+
+
+                <table style="margin-top: 1%;">
+                    <thead>
+                        <c:if test="${requestScope.order.status.ID=='1'}">
+                            <tr>
+                                <th><a class="btn btn-warning" href="">Hủy đơn hàng</a></th>
+                            </tr>
+                        </c:if>
+                        <c:if test="${requestScope.order.status.ID!='1'}">
+                            <tr>
+                                <th><a class="btn btn-warning" href="">Yêu cầu hủy đơn hàng</a></th>
+                            </tr>
+                        </c:if>
+                    </thead>
+
                 </table>
             </div>
 

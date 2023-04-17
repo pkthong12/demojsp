@@ -52,7 +52,7 @@
                     <tbody>
                         <c:forEach items="${requestScope.listorder}" var="order">
                             <tr>
-                                <td>${order.ID}</td>
+                                <td>ĐB-${order.ID}</td>
                                 <td>${order.thoigian}</td>
                                 <td>${order.status.mota}</td>
                                 <td><fmt:formatNumber pattern="###,###" value="${order.total}"/>đ</td>

@@ -92,8 +92,8 @@ public class BookDAO extends DBcontext {
 
     public List<Book> getBookByCategoryID(String id) {
         List<Book> list = new ArrayList<>();
-        if (id ==null ||"All".equals(id)) {
-            list =getALL();
+        if (id == null || "All".equals(id)) {
+            list = getALL();
         } else {
             for (Book book : getALL()) {
                 if (Integer.parseInt(id) == book.getCategory().getId()) {
@@ -171,9 +171,9 @@ public class BookDAO extends DBcontext {
             System.out.println("lỗi nè");
         }
     }
-    
-    public List<Carts> updateCarts(String s, int accid){
-        String sql ="UPDATE `db_web`.`carts` SET `Spvsl` = ? WHERE `AccountID` = ?";
+
+    public List<Carts> updateCarts(String s, int accid) {
+        String sql = "UPDATE `db_web`.`carts` SET `Spvsl` = ? WHERE `AccountID` = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, s);
@@ -183,6 +183,7 @@ public class BookDAO extends DBcontext {
         }
         return getBookByCarts(accid);
     }
+
     public void removetoCarts(int bookid, int acid) {
 
         String str = "";
@@ -266,13 +267,8 @@ public class BookDAO extends DBcontext {
             ps.setString(7, giamgia);
             ps.setInt(8, stt);
             ps.setInt(9, soluong);
-            if("".equals(img)){
-                ps.setString(10, "Image");
-            }
-            else{
-                ps.setString(10, img);
-            }
-            
+            ps.setString(10, img);
+
             ps.executeUpdate();
 
             return sql;

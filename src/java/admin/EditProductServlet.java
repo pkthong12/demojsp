@@ -34,6 +34,7 @@ public class EditProductServlet extends HttpServlet {
 
     private static final String SAVE_DIR = "img/img-product/";
     private static String img = "";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -82,6 +83,7 @@ public class EditProductServlet extends HttpServlet {
                 BookDAO acdao = new BookDAO();
                 Book book = acdao.getBookByID(id);
                 request.setAttribute("book", book);
+                img = book.getImg();
             } catch (Exception e) {
             }
         }
@@ -113,6 +115,7 @@ public class EditProductServlet extends HttpServlet {
         String soluong_raw = request.getParameter("soluong");
         String stt_raw = request.getParameter("stt");
         try {
+            Part part = request.getPart("file");
             int category = Integer.parseInt(category_raw);
             int soluong = Integer.parseInt(soluong_raw);
             int stt = Integer.parseInt(stt_raw);
@@ -121,7 +124,6 @@ public class EditProductServlet extends HttpServlet {
             BookDAO bookdao = new BookDAO();
             String str = "";
             if ("add".equals(idcheck)) {
-                Part part =  request.getPart("file");
                 String fileName = extractFileName(part);
                 // refines the fileName in case it is an absolute path
                 fileName = new File(fileName).getName();
@@ -133,7 +135,7 @@ public class EditProductServlet extends HttpServlet {
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
                 }
-                img = SAVE_DIR +renameFile(fileName);
+                img = SAVE_DIR + renameFile(fileName);
                 part.write(savePath + File.separator + renameFile(fileName));
 
                 bookdao.addBook(tensach, tacgia, trongluong, price, giamgia, dinhdang, category, soluong, stt, img);
@@ -141,20 +143,24 @@ public class EditProductServlet extends HttpServlet {
             }
             if ("edit".equals(idcheck)) {
                 int id = Integer.parseInt(id_raw);
-                Part part =  request.getPart("file");
-                String fileName = extractFileName(part);
-                // refines the fileName in case it is an absolute path
-                fileName = new File(fileName).getName();
-                String appPath = request.getServletContext().getRealPath("");
-                String savePath = appPath + File.separator + SAVE_DIR;
+                String filecheck = part.getSubmittedFileName();
+                if ("".equals(filecheck)) {
+                } else {
+                    String fileName = extractFileName(part);
+                    // refines the fileName in case it is an absolute path
+                    fileName = new File(fileName).getName();
+                    String appPath = request.getServletContext().getRealPath("");
+                    String savePath = appPath + File.separator + SAVE_DIR;
 
-                // creates the save directory if it does not exists
-                File fileSaveDir = new File(savePath);
-                if (!fileSaveDir.exists()) {
-                    fileSaveDir.mkdir();
+                    // creates the save directory if it does not exists
+                    File fileSaveDir = new File(savePath);
+                    if (!fileSaveDir.exists()) {
+                        fileSaveDir.mkdir();
+                    }
+                    img = SAVE_DIR + renameFile(fileName);
+                    part.write(savePath + File.separator + renameFile(fileName));
+
                 }
-                
-                part.write(savePath + File.separator + renameFile(fileName));
                 bookdao.updateBook(tensach, tacgia, trongluong, price, giamgia, dinhdang, category, soluong, stt, id, img);
                 str = " đã cập nhật thông tin sách " + tensach;
             }

@@ -200,6 +200,32 @@
                                     </c:forEach>
                         </ul>
                     </div>
+                    <div class="card bg-light mb-3">
+                        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Khoảng giá</div>
+                        <ul class="list-group category_block">
+                            <li class="list-group-item">
+                                <input type="checkbox">
+                                <label class="doimau">con gà</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox">
+                                <label>con gà</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox">
+                                <label>con gà</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox">
+                                <label>con gà</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input type="checkbox">
+                                <label>con gà</label>
+                            </li>
+                            
+                        </ul>
+                    </div>
                 </div>
                 <div class="col">
                     <div class="row">

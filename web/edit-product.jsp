@@ -212,7 +212,7 @@
                                         <c:if test="${requestScope.idcheck != 'add'}">
                                             <button <c:if test="${sessionScope.account.role =='2'}"> disabled="" </c:if> type="button" onclick="dodelete('${requestScope.book.id}')" class="btn btn-danger">Delete</button>
                                         </c:if>
-                                        <button type="reset" class="btn btn-default"><a href="tbl-user">Cancel</a></button>
+                                        <button type="reset" class="btn btn-default"><a href="tbl-product">Cancel</a></button>
                                     </div>
                                 </div>
                             </div>

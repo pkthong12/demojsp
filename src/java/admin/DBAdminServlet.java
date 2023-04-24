@@ -77,10 +77,20 @@ public class DBAdminServlet extends HttpServlet {
                 slPending++;
             }
         }
+        int sl=0;
+        for (Book bk : listbook) {
+            sl+=bk.getSoluong();
+        }
+//        int slUseronDay=0;
+//        for (Account bk : listacc) {
+//            if(String.format("", args))
+//        }
+        java.time.LocalDate.now();
         request.setAttribute("sluser", listacc.size());
         request.setAttribute("slbook", listbook.size());
         request.setAttribute("slorder", listorder.size());
         request.setAttribute("slorderPending", slPending);
+        request.setAttribute("slbooktonkho", sl);
         request.setAttribute("history", listhistory);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     } 

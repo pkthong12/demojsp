@@ -30,8 +30,8 @@
                 <form style="display: contents;" action="change" method="post">
                     <div class="col-md-3 border-right"> 
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                            <img style="width: 75%;" class="rounded-circle mt-5" src="img\anh5.jpg">
-                            <center><input style="    width: 100%;
+                            <img id="anhshow" style="width: 75%;" class="rounded-circle mt-5" src="img\anh5.jpg">
+                            <center><input id="anhinput" style="    width: 100%;
                                            margin-top: 6%;
                                            margin-left: 4%;
                                            padding: 4%;" class="text-black-50" type="file" id="file" name="file" multiple /></center>
@@ -125,7 +125,15 @@
 
                             return true;
                         }
+const input = document.getElementById('anhinput');
+            const image = document.getElementById('anhshow');
 
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
+                }
+            });
 
 </script>
 </body>

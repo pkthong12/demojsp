@@ -91,16 +91,23 @@
                 </table>
 
 
-                <table style="margin-top: 1%;">
+                <table class="table table-bordered" style="margin-top: 1%; border: 1px solid transparent">
                     <thead>
                         <c:if test="${requestScope.order.status.ID=='1'}">
                             <tr>
-                                <th><a class="btn btn-warning" href="">Hủy đơn hàng</a></th>
+                                <th><a class="btn btn-warning" href="#">Hủy đơn hàng</a></th>
                             </tr>
                         </c:if>
-                        <c:if test="${requestScope.order.status.ID!='1'}">
+                        <c:if test="${requestScope.order.status.ID=='3'}">
                             <tr>
                                 <th><a class="btn btn-warning" href="">Yêu cầu hủy đơn hàng</a></th>
+                            </tr>
+                        </c:if>
+                        <c:if test="${requestScope.order.status.ID=='4'}">
+                            
+                            <tr>
+                                <th colspan="2"><a class="btn btn-success" href="">Đã nhận</a></th>
+                                <th ><a style="float: right" class="btn btn-warning" href="">Yêu cầu hoàn hàng</a></th>
                             </tr>
                         </c:if>
                     </thead>

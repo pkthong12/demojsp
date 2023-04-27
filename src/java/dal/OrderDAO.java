@@ -165,7 +165,7 @@ public class OrderDAO extends DBcontext {
             st.setDouble(4, thanhtien);
             st.setDouble(5, (thanhtien / soluong));
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
 
     }
@@ -180,7 +180,7 @@ public class OrderDAO extends DBcontext {
             if (rs.next()) {
                 return rs.getInt("ID");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return 0;
     }

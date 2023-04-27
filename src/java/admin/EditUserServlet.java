@@ -5,6 +5,7 @@
 package admin;
 
 import dal.AccountDAO;
+import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +13,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import model.Account;
+import model.OrderCart;
+import model.Order_Detail;
 
 /**
  *
@@ -54,9 +59,16 @@ public class EditUserServlet extends HttpServlet {
             try {
                 int id = Integer.parseInt(id_raw);
                 AccountDAO acdao = new AccountDAO();
+                OrderDAO odao = new OrderDAO();
                 Account ac = acdao.getAccbyID(id);
                 request.setAttribute("acc", ac);
-            } catch (Exception e) {
+                request.setAttribute("order", odao.getAllOrderOfUser(id));
+                List<Order_Detail> Listorderdetails = new ArrayList<>();
+                for (OrderCart c : odao.getAllOrderOfUser(id)) {
+                    Listorderdetails.addAll(odao.getOrderDetailForAdmin(c.getID()));
+                }
+                request.setAttribute("orderdetails", Listorderdetails);
+            } catch (NumberFormatException e) {
             }
         }
         request.setAttribute("idcheck", action);

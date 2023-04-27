@@ -98,14 +98,14 @@ public class WebDAO extends DBcontext {
             st.setString(8, insta);
 
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return null;
     }
 
     public List<HistoryWeb> getHistory() {
         List<HistoryWeb> list = new ArrayList<>();
-        String sql = "SELECT * FROM db_web.history_web order by TimeHis desc";
+        String sql = "SELECT * FROM db_web.history_web ORDER BY ID DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

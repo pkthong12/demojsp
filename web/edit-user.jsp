@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +18,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
 
             body{
@@ -154,11 +157,11 @@
                                         <input  name="email" required="" value="${requestScope.acc.email}" type="email" class="form-control">
                                     </div>
                                 </div>
-                                        <div style="<c:if test="${sessionScope.account.role =='2'}"> display: none </c:if>" class="form-group">
-                                    <label class="col-sm-2 control-label">Quyền</label>
-                                    <div class="col-sm-10">
-                                        <select name="role" class="form-control">
-                                            <option value="${requestScope.acc.role}" selected="">
+                                <div style="<c:if test="${sessionScope.account.role =='2'}"> display: none </c:if>" class="form-group">
+                                        <label class="col-sm-2 control-label">Quyền</label>
+                                        <div class="col-sm-10">
+                                            <select name="role" class="form-control">
+                                                <option value="${requestScope.acc.role}" selected="">
                                                 <c:choose>
                                                     <c:when test="${requestScope.acc.role == 1}">  
                                                         Admin  
@@ -216,14 +219,41 @@
                             </div>
                         </div>
                     </form>
+                    <c:if test="${requestScope.idcheck!='add'&&requestScope.order.size()!=null}">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Đơn hàng</th>
+                                    <th>Ngày</th>
+                                    <th>Trạng thái đơn hàng</th>
+                                    <th>Tổng</th>
+                                    <th>Chi tiết ${requestScope.orderdetails.size()}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <c:forEach items="${requestScope.order}" var="order">
+                                    <tr>
+                                        <td>ĐB-${order.ID}</td>
+                                        <td>${order.thoigian}</td>
+                                        <td>${order.status.mota}</td>
+                                        <td><fmt:formatNumber pattern="###,###" value="${order.total}"/>đ</td>
+                                        <td style="text-align: center;"><a target="_blank" href="update-order?order=${order.ID}"  ><i class='fas fa-eye' style='font-size:30px'></i></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
+
             </div>
+           
         </div>
     </body>
     <script type="text/javascript">
         function dodelete(id) {
             let text = "Chắc chắn xóa người dùng này?";
-            if (confirm(text) == true) {
+            if (confirm(text) === true) {
                 window.location = ("delete?action=user&id=" + id);
             }
         }

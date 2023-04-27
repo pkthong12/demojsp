@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - 404</title>
+        <title>Không tìm thấy trang</title>
 
         <link href="css/404css.css" rel="stylesheet">
 
@@ -56,7 +56,7 @@
                         <p class="message__text">We're sorry, the page you were looking for isn't found here. The link you followed may either be broken or no longer exists. Please try again, or take a look at our.</p>
                     </div>
                     <div class="error__nav e-nav">
-                        <a href="" target="_blanck" class="e-nav__link"></a>
+                        <a href="index"  class="e-nav__link"></a>
                     </div>
                 </div>
                 <!-- END Content -->

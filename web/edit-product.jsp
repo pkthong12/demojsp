@@ -103,19 +103,19 @@
                     <form class="form-horizontal" action="edit-product" method="post" enctype="multipart/form-data">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
-                                <img src="${requestScope.book.img}" class="img-circle profile-avatar" alt="Image">
+                                <img id="anhshow" src="${requestScope.book.img}" class="img-circle profile-avatar" alt="Image">
                             </div>
-                                <center><input style="margin: 1.5%;" class="text-black-50" type="file" <c:if test="${requestScope.idcheck != 'add'}">value="${requestScope.idcheck}" </c:if>  id="file" name="file" <c:if test="${requestScope.idcheck == 'add'}">required="" </c:if>  /></center>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">Thông tin truyện </h4>
+                            <center><input id="anhinput" style="margin: 1.5%;" class="text-black-50" type="file" <c:if test="${requestScope.idcheck != 'add'}">value="${requestScope.idcheck}" </c:if>  id="file" name="file" <c:if test="${requestScope.idcheck == 'add'}">required="" </c:if>  /></center>
                             </div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">ID truyện</label>
-                                    <div class="col-sm-10">
-                                        <input name="idcheck" value="${requestScope.idcheck}" readonly="" type="hidden" class="form-control">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Thông tin truyện </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">ID truyện</label>
+                                        <div class="col-sm-10">
+                                                <input name="idcheck" value="${requestScope.idcheck}" readonly="" type="hidden" class="form-control">
                                         <input name="id" value="${requestScope.book.id}" readonly="" type="text" class="form-control">
                                     </div>
 
@@ -200,12 +200,12 @@
                                         </select>
                                     </div>
                                 </div>
-<!--                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Ảnh </label>
-                                    <div  class="col-sm-10">
-                                        <input  name="img" value="${requestScope.book.img}" required="" type="text" class="form-control">
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Ảnh </label>
+                                                                    <div  class="col-sm-10">
+                                                                        <input  name="img" value="${requestScope.book.img}" required="" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>-->
                                 <div class="form-group">
                                     <div class="col-sm-10 col-sm-offset-2">
                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -224,10 +224,20 @@
         <script type="text/javascript">
             function dodelete(id) {
                 let text = "Chắc chắn xóa sách này?";
-                if (confirm(text) == true) {
+                if (confirm(text) === true) {
                     window.location = ("delete?action=product&id=" + id);
                 }
             }
+
+            const input = document.getElementById('anhinput');
+            const image = document.getElementById('anhshow');
+
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const src = URL.createObjectURL(e.target.files[0]);
+                    image.src = src;
+                }
+            });
         </script>
     </body>
 </html>

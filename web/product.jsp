@@ -28,7 +28,7 @@
         <c:set var="book" value="${requestScope.book}"></c:set>
             <form action="add" method="post">
                 <section class="py-5">
-                    <a  style="text-decoration: none;" href="index">
+                    <a style="text-decoration: none; cursor: pointer; color: #386bc0" onclick="history.back()" >
                         <h6 style="margin-left: 13%"><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
                     </a>
                     <div class="container px-4 px-lg-5 my-5">

@@ -200,11 +200,19 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Thời gian tạo</label>
+                                    <div class="col-sm-10">
+                                        <input name="id" value="${requestScope.acc.timeCreate}" disabled="" readonly="" type="text" class="form-control">
+                                    </div>
+
+                                </div>
                                 <c:if test="${sessionScope.notifi != ''}">
                                     <div class="form-group">
                                         <center><h4 style="color: red">${sessionScope.notifi}</h4></center>
                                     </div>
                                 </c:if>
+
                                 <% session.removeAttribute("notifi");%>
                                 <div class="form-group">
                                     <div class="col-sm-10 col-sm-offset-2">
@@ -247,7 +255,7 @@
                 </div>
 
             </div>
-           
+
         </div>
     </body>
     <script type="text/javascript">

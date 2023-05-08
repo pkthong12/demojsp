@@ -195,7 +195,7 @@ public class OrderDAO extends DBcontext {
                 OrderStatus status = new OrderStatus(rs.getInt("ID"), rs.getString("des_status"));
                 listorderStatus.add(status);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return listorderStatus;
     }
@@ -245,4 +245,6 @@ public class OrderDAO extends DBcontext {
         }
 
     }
+
+    
 }

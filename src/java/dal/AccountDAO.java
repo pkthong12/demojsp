@@ -7,10 +7,13 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Account;
-import model.Category;
 
 /**
  *
@@ -34,13 +37,28 @@ public class AccountDAO extends DBcontext {
                         rs.getString("Email"),
                         rs.getString("Img"),
                         rs.getString("RoleID"),
-                        rs.getInt("Stt"));
+                        rs.getInt("Stt"),
+                        rs.getString("TimeSignup"));
                 list.add(acc);
             }
         } catch (SQLException e) {
 
         }
         return list;
+    }
+
+    public List<Account> FindAccountByTime() {
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        String dateNowString = df.format(date);
+        List<Account> lacc = new ArrayList<>();
+        for (Account acc : getALL()) {
+            String[] arr = acc.getTimeCreate().split(" ");
+            if(arr[0].replace("-", "/").equals(dateNowString)){
+                lacc.add(acc);
+            }
+        }
+        return lacc;
     }
 
     public Account checkLogin(String user, String pass) {
@@ -62,7 +80,8 @@ public class AccountDAO extends DBcontext {
                         rs.getString("Email"),
                         rs.getString("Img"),
                         rs.getString("RoleID"),
-                        rs.getInt("Stt")
+                        rs.getInt("Stt"),
+                        rs.getString("TimeSignup")
                 );
                 return acc;
             }
@@ -89,8 +108,8 @@ public class AccountDAO extends DBcontext {
                         rs.getString("Email"),
                         rs.getString("Img"),
                         rs.getString("RoleID"),
-                        rs.getInt("Stt")
-                );
+                        rs.getInt("Stt"),
+                        rs.getString("TimeSignup"));
                 return acc;
             }
         } catch (SQLException e) {
@@ -108,11 +127,15 @@ public class AccountDAO extends DBcontext {
                 + "`Phone`,"
                 + "`Email`,"
                 + "`RoleID`,"
-                + "`Stt`)"
+                + "`Stt`,"
+                + "`TimeSignup`)"
                 + "VALUES"
-                + "(?,?,?,?,?,?,?,?);";
+                + "(?,?,?,?,?,?,?,?,?);";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            Date date = new Date();
+            DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String dateString = df.format(date);
             ps.setString(1, user);
             ps.setString(2, pass);
             ps.setString(3, hoten);
@@ -121,6 +144,7 @@ public class AccountDAO extends DBcontext {
             ps.setString(6, email);
             ps.setString(7, roleID);
             ps.setString(8, stt);
+            ps.setString(9, dateString);
             ps.executeUpdate();
 
             return true;
@@ -137,7 +161,7 @@ public class AccountDAO extends DBcontext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
-            int id=0;
+            int id = 0;
             if (rs.next()) {
                 id = rs.getInt("id");
                 String sql1 = "INSERT INTO `db_web`.carts (`AccountID`,`Spvsl`) VALUES (?,?)";
@@ -228,9 +252,9 @@ public class AccountDAO extends DBcontext {
     }
 
     public Boolean deleteAccount(int id) {
-        String sql = "DELETE FROM db_web.carts WHERE AccountID = "+id;
-        String sql1 = "DELETE FROM db_web.account WHERE ID = "+id;
-        String sql2 = "DELETE FROM db_web.history_web WHERE AccountID = "+id;
+        String sql = "DELETE FROM db_web.carts WHERE AccountID = " + id;
+        String sql1 = "DELETE FROM db_web.account WHERE ID = " + id;
+        String sql2 = "DELETE FROM db_web.history_web WHERE AccountID = " + id;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.executeUpdate();

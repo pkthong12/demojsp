@@ -344,7 +344,7 @@
                                                     $("#phiship").val(ship);
                                                     totalfirst = (total + ship);
                                                     total = (total + ship) - (total + ship) * discount / 100;
-                                                    
+
                                                     document.getElementById("ship").innerHTML = VND.format(ship);
                                                     document.getElementById("total").innerHTML = VND.format(total);
                                                 };
@@ -401,13 +401,13 @@
                                                 const show = document.querySelector('#noti');
 
                                                 var magg = document.getElementById("magg").value.toUpperCase();
-                                                <c:forEach items="${sessionScope.discountcode}" var="code">
-                                                    if (magg === '${code.magg.toUpperCase()}') {
-                                                        noti = "Áp thành công mã giảm giá " +${code.rate} + "%";
-                                                        discount = ${code.rate};
-                                                        total = total - total * discount / 100;
-                                                    }
-                                                </c:forEach>
+        <c:forEach items="${sessionScope.discountcode}" var="code">
+                                                if (magg === '${code.magg.toUpperCase()}') {
+                                                    noti = "Áp thành công mã giảm giá " +${code.rate} + "%";
+                                                    discount = ${code.rate};
+                                                    total = total - total * discount / 100;
+                                                }
+        </c:forEach>
                                                 show.style.display = 'block';
                                                 document.getElementById("noticheck").innerHTML = noti;
                                                 document.getElementById("total").innerHTML = VND.format(total);

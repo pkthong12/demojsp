@@ -173,6 +173,10 @@
         <servlet-name>UpdateCartsServlet</servlet-name>
         <servlet-class>client.UpdateCartsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExportServlet</servlet-name>
+        <servlet-class>controller.ExportServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/auth</url-pattern>
@@ -259,7 +263,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderDetailServlet</servlet-name>
-        <url-pattern>/order-detail</url-pattern>
+        <url-pattern>/order-detail/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateOrderServlet</servlet-name>
@@ -273,9 +277,13 @@
         <servlet-name>UpdateCartsServlet</servlet-name>
         <url-pattern>/updatecarts</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportServlet</servlet-name>
+        <url-pattern>/export/*</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
 </web-app>

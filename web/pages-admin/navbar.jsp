@@ -53,6 +53,7 @@
                         <a class="collapse-item" href="tbl-user">Người dùng</a>
                         <a class="collapse-item" href="tbl-product">Truyện</a>
                         <a class="collapse-item" href="tbl-orders">Đơn hàng</a>
+                        <a class="collapse-item" href="">Tickets</a>
                     </div>
                 </div>
             </li>

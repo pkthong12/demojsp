@@ -100,7 +100,7 @@ public class UpdateOrderServlet extends HttpServlet {
             if(hoten==null){
                 orderDAO.updateOder(ID, "", "", "", "", stt);
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
         }
         response.sendRedirect("tbl-orders");
     }

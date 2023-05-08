@@ -63,11 +63,6 @@ public class EditUserServlet extends HttpServlet {
                 Account ac = acdao.getAccbyID(id);
                 request.setAttribute("acc", ac);
                 request.setAttribute("order", odao.getAllOrderOfUser(id));
-                List<Order_Detail> Listorderdetails = new ArrayList<>();
-                for (OrderCart c : odao.getAllOrderOfUser(id)) {
-                    Listorderdetails.addAll(odao.getOrderDetailForAdmin(c.getID()));
-                }
-                request.setAttribute("orderdetails", Listorderdetails);
             } catch (NumberFormatException e) {
             }
         }

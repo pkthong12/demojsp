@@ -176,8 +176,8 @@
         <div style="width: fit-content;
              margin-left: 4%;
              margin-top: 3%;">
-            <a style="text-decoration: none;" href="index">
-                <h6><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
+            <a style="text-decoration: none; cursor: pointer; color: #386bc0" onclick="history.back()" >
+                <h6 ><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
             </a>
         </div>
 
@@ -196,7 +196,7 @@
                         <ul class="list-group category_block">
                             <a href="collection"><li style="font-weight: bold; color: red " class="list-group-item">Tất cả sản phẩm</li></a>
                                     <c:forEach items="${sessionScope.listCategory}" var="c">
-                                <a href="collection?categoryid=${c.id}"><li class="list-group-item">${c.tenloai}</li></a>
+                                        <a href="collection?categoryid=${c.id}"><li class="list-group-item">${c.tenloai}</li></a>
                                     </c:forEach>
                         </ul>
                     </div>
@@ -223,7 +223,7 @@
                                 <input type="checkbox">
                                 <label>con gà</label>
                             </li>
-                            
+
                         </ul>
                     </div>
                 </div>

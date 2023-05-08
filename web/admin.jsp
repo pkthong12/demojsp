@@ -140,7 +140,7 @@
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.slorderPending}</div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                                    <i class="fas fa-list-ul fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,7 +162,7 @@
                                                 <div class="col mr-2">
                                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                         Người dùng mới trong hôm nay</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.sluser}</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.userOnday.size()}</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fa fa-user fa-2x text-gray-300"></i>
@@ -222,8 +222,8 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                        Đơn hàng chờ xác nhận</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.slorderPending}</div>
+                                                        Yêu cầu hỗ trợ đang mở</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.openTicket.size()}</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fas fa-comments fa-2x text-gray-300"></i>

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author ThinkPad X1 G4
@@ -11,12 +13,12 @@ package model;
 public class Account {
     private int id, stt;
     private String username, password, hoten, diachi, email,role,img, phone;
-    
+    private String timeCreate;
 
     public Account() {
     }
 
-    public Account(int id, String username, String password, String hoten, String diachi,String phone, String email, String img, String role, int stt) {
+    public Account(int id, String username, String password, String hoten, String diachi,String phone, String email, String img, String role, int stt,String timeCreate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -27,6 +29,7 @@ public class Account {
         this.role = role;
         this.img = img;
         this.stt = stt;
+        this.timeCreate = timeCreate;
     }
 
     public int getStt() {
@@ -50,13 +53,12 @@ public class Account {
     }
 
     public void setImg(String img) {
-        if(img ==""){
+        if("".equals(img)){
             this.img = "img/anh5.jsp";
         }
         else{
             this.img = img;
         }
-        
     }
 
     public int getId() {
@@ -115,5 +117,13 @@ public class Account {
         this.role = role;
     }
 
+    public String getTimeCreate() {
+        return timeCreate;
+    }
+
+    public void setTimeCreate(String timeCreate) {
+        this.timeCreate = timeCreate;
+    }
+    
     
 }

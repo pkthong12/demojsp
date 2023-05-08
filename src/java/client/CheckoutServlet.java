@@ -14,13 +14,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static java.util.Map.entry;
 import model.Account;
 import model.Book;
 import model.Carts;
@@ -68,18 +66,18 @@ public class CheckoutServlet extends HttpServlet {
         String[] l1 = value.split("tdz");
         String[] l2 = null;
         for (String string : l1) {
-            if (string == "" || string == null) {
+            if ("".equals(string) || string == null) {
 
             } else {
                 l2 = string.split("thdzvkl");
                 if (Integer.parseInt(l2[0]) == 0 || Integer.parseInt(l2[1]) == 0) {
 
-                } //                    dacat
+                } //dacat
                 else {
 
                     BookDAO bookdao = new BookDAO();
                     Book bk = bookdao.getBookByID(Integer.parseInt(l2[0]));
-                    out.put(bk, Integer.parseInt(l2[1]));
+                    out.put(bk, Integer.valueOf(l2[1]));
                 }
             }
         }

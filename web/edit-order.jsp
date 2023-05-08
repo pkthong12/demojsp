@@ -68,10 +68,10 @@
                         <div class="card shadow mb-4">
 
                             <div class="card-body">
-                                <a style="text-decoration: none;" href="tbl-orders">
+                                <a style="text-decoration: none; cursor: pointer; color: #386bc0" onclick="history.back()" >
                                     <h6 ><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
                                 </a>
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="source-html">
                                     <div style="margin-top: 1rem!important;" class="container px-5 my-5">
                                         <form id="contactForm" action="update-order" method="post">
                                             <div class="form-floating mb-3">
@@ -81,7 +81,7 @@
                                                 <label for="tenWebsite">Thời gian: ${requestScope.order.thoigian}</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <label for="tenWebsite">Tài khoản: <a href="edit-user?action=edit&id=${requestScope.order.account.id}">${requestScope.order.account.username}</a></label>
+                                                <label for="tenWebsite">Tài khoản: <a target="_blank" href="edit-user?action=edit&id=${requestScope.order.account.id}">${requestScope.order.account.username}</a></label>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <label for="diaChỉSốDường">Họ tên:</label>
@@ -99,7 +99,7 @@
                                                 <label  for="emailAddress">Email: </label>
                                                 <input disabled="" class="form-control info" name="email" id="emailAddress" type="email" placeholder="Email" required value="${requestScope.order.account.email}" />
                                             </div>
-                                            <table style="margin-top: 1%;" class="table table-bordered">
+                                            <table style="margin-top: 1%; border: 1px solid" class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Sản phẩm</th>
@@ -108,12 +108,7 @@
                                                         <th>Tổng</th>
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th style="font-weight: bold" colspan="3">Tổng tiền</th>
-                                                        <th><fmt:formatNumber pattern="###,###" value="${requestScope.order.total}"/>đ</th>
-                                                    </tr>
-                                                </tfoot>
+
                                                 <tbody>
                                                     <c:forEach items="${requestScope.listdetail}" var="detail">
                                                         <tr>
@@ -136,26 +131,29 @@
                                                         <td colspan="3">Giảm giá</td>
                                                         <td>${requestScope.order.giamgia}%</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td >Trạng thái</td>
-                                                        <td colspan="3">${requestScope.order.status.mota}</td>
-                                                    </tr>
                                                 </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th style="font-weight: bold" colspan="3">Tổng tiền</th>
+                                                        <th><fmt:formatNumber pattern="###,###" value="${requestScope.order.total}"/>đ</th>
+                                                    </tr>
+                                                </tfoot>
                                             </table>
                                             <div class="form-floating mb-3">
                                                 <label  for="emailAddress">Trạng thái đơn hàng: </label>
-                                                <select style="width: 100%;
-                                                        height: 35px;
-                                                        border-radius: 5px;" class="form-select" id="newField1" name="stt">
-                                                    <option selected="" value="${requestScope.order.status.ID}">${requestScope.order.status.mota}</option>
+                                                <select <c:if test="${requestScope.order.status.ID == 7}">disabled=""</c:if> style="width: 100%;
+                                                                                                          height: 35px;
+                                                                                                          border-radius: 5px;" class="form-select" id="newField1" name="stt">
+                                                        <option selected="" value="${requestScope.order.status.ID}">${requestScope.order.status.mota}</option>
                                                     <c:forEach items="${requestScope.orderstt}" var="stt">
                                                         <option value="${stt.ID}">${stt.mota}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                            <div class="d-grid">
+                                            <div <c:if test="${requestScope.order.status.ID == 7}"> style="display: none"</c:if> class="d-grid">
                                                 <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Cập nhật</button>
                                                 <button class="btn btn-primary btn-lg" id="submitButton" onclick="change()" type="button">Yêu cầu cập nhật thông tin</button>
+                                                <a type="button" href="export/hoadon?id=${requestScope.order.ID}"class="btn btn-success btn-lg" id="btn-export" >Xuất hóa đơn</a>
                                             </div>
                                         </form>
                                     </div>
@@ -213,7 +211,7 @@
                                                             collection[i].disabled = !collection[i].disabled;
                                                         }
                                                     }
-
+                                                    ;
         </script>
 
     </body>

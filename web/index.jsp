@@ -1,91 +1,84 @@
-
-
-<%@page import="java.util.Base64"%>
-<%@ page import="java.sql.*"%>
-
-<%@ page import="java.io.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="jakarta.servlet.http.HttpSession"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>File Upload</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Đăng nhập</title>
+        <link REL="SHORTCUT ICON" HREF="img\icon.png">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
-            *{
-                font-family: 'Roboto Condensed', Arial;
-                box-sizing: border-box;
+            .divider:after,
+            .divider:before {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: #eee;
             }
-
-            #input {
-                width: 100%;
-                font-size: 16px;
-                padding: 12px 20px 12px 40px;
-                border: 1px solid
-                    margin-bottom: 12px;
-                #ddd;
+            .h-custom {
+                height: calc(100% - 73px);
             }
-            #myUL {
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-            }
-            #myUL li a {
-                border: 1px solid #ddd;
-                margin-top: -1px;
-                background-color:
-                    padding: 12px;
-                #eae2b7;
-                text-decoration: none;
-                font-size: 18px;
-                color: black;
-                display: block
-            }
-            #myUL li a:hover:not(.header) {
-                background-color:
-                    #003049;
-                color: white;
+            @media (max-width: 450px) {
+                .h-custom {
+                    height: 100%;
+                }
             }
         </style>
     </head>
     <body>
-        <h2>DANH BẠ</h2>
-        <input type="text" id="input" onkeyup="timkiem()" placeholder="Search for names.."> 
-        <ul id="myUL">
-            <li><a href="#">An</a></li> 
-            <li><a href="#">Bảo</a></li> 
-            <li><a href="#">Bình</a></li> 
-            <li><a href="#">Hiền</a></li> 
-            <li><a href="#">Huyền</a></li> 
-            <li><a href="#">Mai</a></li> 
-            <li><a href="#">Minh</a></li> 
-            <li><a href="#">Tuấn</a></li>
-            <li><a href="#">Văn</a></li> 
-            <li><a href="#">Yến</a></li>
-        </ul>
 
-    </body>
-    <script type="text/javascript">
-        function timkiem() {
-// Khai báo các biến
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById("input");
-            
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-//Lặp lại tất cả các mục trong danh sách và ẩn những mục không khớp với truy vấn tìm kiếm 
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display="";
-                }
-                
-                else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
+        <!------ Include the above in your HEAD tag ---------->
+
+        <div class="container">    
+            <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                <div class="panel panel-info" >
+                    <div style="padding-top:30px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                        <form id="loginform" class="form-horizontal" role="form" action="admin" method="post">
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="login-username" type="text" class="form-control" name="user" required value="" placeholder="Username or email">                                        
+                            </div>
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="pass" required placeholder="Password">
+                            </div>
+                            <c:if test="${requestScope.error != null}">
+                                <center><span style="color: red;">${requestScope.error}</span></center>
+                                </c:if>
+                            <div style="margin-top:10px" class="form-group">
+                                <!-- Button -->
+
+                                <div class="col-sm-12 controls">
+                                    <input id="btn-login" class="btn btn-success" type="submit" name="login" value="Login" />
+                                </div>
+                            </div>
+                        </form>     
+                    </div>                     
+                </div>  
+            </div>
+        </div> 
+    </div>
+</div>
+</body>
+<c:if test="${sessionScope.notifi != null}">
+    <script>
+            window.alert("${sessionScope.notifi}");
+        <% 
+            session.removeAttribute("notifi");
+        %>
     </script>
+</c:if>
+
 
 </html>

@@ -3,30 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package dd;
+package Services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author ThinkPad X1 G4
  */
-@MultipartConfig
-public class FileUploadServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet {
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -34,12 +26,10 @@ public class FileUploadServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request,
-        HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-
-}
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -52,7 +42,7 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     } 
 
     /** 
@@ -65,38 +55,18 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-            Part pat =request.getPart("file");
-            String fileName = pat.getSubmittedFileName();
-            PrintWriter out = response.getWriter();
-            String path = getServletContext().getRealPath(File.separator+"tmp"+File.separator+fileName);
-            InputStream is = pat.getInputStream();
-            boolean test = uploadFile(is,path);
-            if(test){
-                out.println("uploaded");
-            }else{
-                out.println("something wrong");
-            }
-            
+        String User= request.getParameter("user");
+        String pass= request.getParameter("pass");
+        DAO db = new DAO();
+        if(db.Checkadmin(User, pass)){
+            HttpSession sess = request.getSession();
+            sess.setAttribute("acc", User);
+            request.getRequestDispatcher("result").forward(request, response);
+        }else{
+            response.sendRedirect("404.jsp");
         }
-    public boolean uploadFile(InputStream is, String path){
-        boolean test = false;
-        try{
-            byte[] byt = new byte[is.available()];
-            is.read();
-            
-            FileOutputStream fops = new FileOutputStream(path);
-            fops.write(byt);
-            fops.flush();
-            fops.close();
-            
-            test = true;
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        return test;
     }
+
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
@@ -105,5 +75,7 @@ public class FileUploadServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+
 
 }

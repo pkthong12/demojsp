@@ -143,7 +143,7 @@ public class CheckoutServlet extends HttpServlet {
                     Book bk = i.getKey();
                     int sl = i.getValue();
                     double thanhtien = (bk.getGiaban() - bk.getGiaban() * bk.getGiamgia() / 100) * sl;
-                    ordao.insetOrderDetail(ID, bk.getTensach(), sl, thanhtien);
+                    ordao.insetOrderDetail(ID, bk.getId(), sl, thanhtien);
                     BookDAO bdao = new BookDAO();
                     bdao.removetoCarts(bk.getId(), accId);
                 }

@@ -62,8 +62,8 @@
                                                     <tr>
                                                         <th  style="text-align: left; width: 50%;border-right: 2px dotted;border-bottom: 2px dotted;">Từ:<br>
                                                             ${sessionScope.configs.tenweb}<br>
-                                                            Nhuệ Giang, Tây Mỗ<br>
-                                                            Nam Từ Liêm, Hà Nội, Việt Nam
+                                                            ${sessionScope.configs.diachiduong}<br>
+                                                            ${sessionScope.configs.diachithanhpho}
                                                         </th>
                                                         <th colspan="3" style="text-align: left;border-bottom: 2px dotted;">Đến:<br>
                                                             ${order.hoten} - ${order.phone}<br>

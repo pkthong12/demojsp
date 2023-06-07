@@ -50,7 +50,19 @@ public class WebDAO extends DBcontext {
         }
         return list;
     }
-
+    public int getStatusWeb(){
+        String sql = "Select Stt from db_web.configsweb WHERE ID = 1";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getByte("Stt");
+            }
+        } catch (SQLException e) {
+            System.out.println("" + e);
+        }
+        return 0;
+    }
     public Configs getConfig() {
         String sql = "SELECT * FROM db_web.configsweb";
 

@@ -103,12 +103,14 @@
                                                                         Admin  
                                                                     </c:when>  
                                                                     <c:when test="${acc.role == 2}">  
-                                                                        BTV
+                                                                        Nhân viên
                                                                     </c:when>
                                                                     <c:when test="${acc.role == 3}">  
                                                                         Người dùng 
                                                                     </c:when>  
-
+                                                                    <c:when test="${acc.role == 4}">  
+                                                                        Quản lý
+                                                                    </c:when>  
                                                                 </c:choose>
                                                             </td>
                                                             <td>
@@ -146,12 +148,14 @@
                                                                         Admin  
                                                                     </c:when>  
                                                                     <c:when test="${acc.role == 2}">  
-                                                                        BTV
+                                                                        Nhân viên
                                                                     </c:when>
                                                                     <c:when test="${acc.role == 3}">  
                                                                         Người dùng 
                                                                     </c:when>  
-
+                                                                    <c:when test="${acc.role == 4}">  
+                                                                        Quản lý
+                                                                    </c:when> 
                                                                 </c:choose>
                                                             </td>
                                                             <td>

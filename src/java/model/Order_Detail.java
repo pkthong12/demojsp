@@ -11,17 +11,17 @@ package model;
 public class Order_Detail {
     private int ID;
     private int OrderID;
-    private String Tensach;
+    private Book Sach;
     private int Soluong;
     private double Thanhtien;
     private double Giaban;
     public Order_Detail() {
     }
 
-    public Order_Detail(int ID, int OrderID, String Tensach, int Soluong, double Thanhtien, double Giaban) {
+    public Order_Detail(int ID, int OrderID, Book Sach, int Soluong, double Thanhtien, double Giaban) {
         this.ID = ID;
         this.OrderID = OrderID;
-        this.Tensach = Tensach;
+        this.Sach = Sach;
         this.Soluong = Soluong;
         this.Thanhtien = Thanhtien;
         this.Giaban = Giaban;
@@ -44,13 +44,15 @@ public class Order_Detail {
         this.OrderID = OrderID;
     }
 
-    public String getTensach() {
-        return Tensach;
+    public Book getSach() {
+        return Sach;
     }
 
-    public void setTensach(String Tensach) {
-        this.Tensach = Tensach;
+    public void setSach(Book Sach) {
+        this.Sach = Sach;
     }
+
+  
 
     public int getSoluong() {
         return Soluong;

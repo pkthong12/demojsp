@@ -21,6 +21,7 @@ import model.Order_Detail;
  */
 public class OrderDAO extends DBcontext {
 
+    BookDAO bdao = new BookDAO();
     public List<OrderCart> getAllOrderForAdmin() {
         List<OrderCart> listorder = new ArrayList<>();
         String sql = "SELECT * FROM db_web.ordercart ORDER BY Thoigian DESC ";
@@ -83,7 +84,7 @@ public class OrderDAO extends DBcontext {
 
     public List<Order_Detail> getOrderDetailForUser(int orderid, int accid) {
         List<Order_Detail> listdetail = new ArrayList<>();
-        String sql = "SELECT db_web.order_detail.ID, OrderID, Tensach, Giaban, Soluong, Thanhtien FROM  db_web.order_detail inner join db_web.ordercart on  db_web.order_detail.OrderID = db_web.ordercart.ID"
+        String sql = "SELECT db_web.order_detail.ID, OrderID, BookID, Giaban, Soluong, Thanhtien FROM  db_web.order_detail inner join db_web.ordercart on  db_web.order_detail.OrderID = db_web.ordercart.ID"
                 + " where db_web.ordercart.ID = ? and db_web.ordercart.AccountID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -93,7 +94,7 @@ public class OrderDAO extends DBcontext {
             while (rs.next()) {
                 Order_Detail detail = new Order_Detail(rs.getInt("ID"),
                         rs.getInt("OrderID"),
-                        rs.getString("Tensach"),
+                        bdao.getBookByID(rs.getInt("BookID")),
                         rs.getInt("Soluong"),
                         rs.getDouble("Thanhtien"),
                         rs.getDouble("Giaban"));
@@ -107,16 +108,17 @@ public class OrderDAO extends DBcontext {
 
     public List<Order_Detail> getOrderDetailForAdmin(int orderid) {
         List<Order_Detail> listdetail = new ArrayList<>();
-        String sql = "SELECT db_web.order_detail.ID, OrderID, Tensach, Giaban, Soluong, Thanhtien FROM  db_web.order_detail inner join db_web.ordercart on  db_web.order_detail.OrderID = db_web.ordercart.ID"
+        String sql = "SELECT db_web.order_detail.ID, OrderID, BookID, Giaban, Soluong, Thanhtien FROM  db_web.order_detail inner join db_web.ordercart on  db_web.order_detail.OrderID = db_web.ordercart.ID"
                 + " where db_web.ordercart.ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, orderid);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
+                
                 Order_Detail detail = new Order_Detail(rs.getInt("ID"),
                         rs.getInt("OrderID"),
-                        rs.getString("Tensach"),
+                        bdao.getBookByID(rs.getInt("BookID")),
                         rs.getInt("Soluong"),
                         rs.getDouble("Thanhtien"),
                         rs.getDouble("Giaban"));
@@ -154,13 +156,13 @@ public class OrderDAO extends DBcontext {
         return false;
     }
 
-    public void insetOrderDetail(int orderid, String tensach, int soluong, double thanhtien) {
-        String sql = "INSERT INTO `db_web`.`order_detail` (`OrderID`, `Tensach`,`Soluong`,`Thanhtien`,`Giaban`)"
+    public void insetOrderDetail(int orderid, int bookID, int soluong, double thanhtien) {
+        String sql = "INSERT INTO `db_web`.`order_detail` (`OrderID`, `BookID`,`Soluong`,`Thanhtien`,`Giaban`)"
                 + "VALUES (?,?,?,?,?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, orderid);
-            st.setString(2, tensach);
+            st.setInt(2, bookID);
             st.setInt(3, soluong);
             st.setDouble(4, thanhtien);
             st.setDouble(5, (thanhtien / soluong));

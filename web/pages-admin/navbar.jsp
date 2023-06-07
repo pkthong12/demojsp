@@ -50,7 +50,9 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="tbl-user">Người dùng</a>
+                        <c:if test="${sessionScope.account.role !=2}">
+                            <a class="collapse-item" href="tbl-user">Người dùng</a>
+                        </c:if>
                         <a class="collapse-item" href="tbl-product">Truyện</a>
                         <a class="collapse-item" href="tbl-orders">Đơn hàng</a>
                         <a class="collapse-item" href="">Tickets</a>

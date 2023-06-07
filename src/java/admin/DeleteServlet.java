@@ -56,7 +56,7 @@ public class DeleteServlet extends HttpServlet {
                 AccountDAO acdao = new AccountDAO();
                 acdao.deleteAccount(id);
                 response.sendRedirect("tbl-user");
-            } catch (Exception e) {
+            } catch (IOException | NumberFormatException e) {
                 System.out.println(e);
             }
         }
@@ -66,7 +66,7 @@ public class DeleteServlet extends HttpServlet {
                 BookDAO bkdao = new BookDAO();
                 bkdao.deleteBook(id);
                 response.sendRedirect("tbl-product");
-            } catch (Exception e) {
+            } catch (IOException | NumberFormatException e) {
                 System.out.println(e);
             }
         }

@@ -112,7 +112,7 @@
                                                 <tbody>
                                                     <c:forEach items="${requestScope.listdetail}" var="detail">
                                                         <tr>
-                                                            <td style="color: #d51c24">${detail.tensach}</td>
+                                                            <td ><a style="color: #d51c24" href="product?id=${detail.sach.id}">${detail.sach.tensach}</a></td>
                                                             <td><fmt:formatNumber pattern="###,###" value="${detail.giaban}"/>đ</td>
                                                             <td>${detail.soluong}</td>
                                                             <td><fmt:formatNumber pattern="###,###" value="${detail.thanhtien}"/>đ</td>

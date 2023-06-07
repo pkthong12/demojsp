@@ -62,7 +62,7 @@
                     <tbody>
                         <c:forEach items="${requestScope.listdetail}" var="detail">
                             <tr>
-                                <td style="color: #d51c24">${detail.tensach}</td>
+                                <td ><a style="color: #d51c24" href="product?id=${detail.sach.id}">${detail.sach.tensach}</a></td>
                                 <td><fmt:formatNumber pattern="###,###" value="${detail.giaban}"/>đ</td>
                                 <td>${detail.soluong}</td>
                                 <td><fmt:formatNumber pattern="###,###" value="${detail.thanhtien}"/>đ</td>
@@ -108,7 +108,7 @@
                                 <th><buton type="button" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Hủy đơn hàng</button></th>
                             </tr>
                         </c:if>
-                        <c:if test="${requestScope.order.status.ID=='3'}">
+                        <c:if test="${requestScope.order.status.ID=='3'||requestScope.order.status.ID=='2'}">
                             <tr>
                                 <th><a class="btn btn-warning" href="">Yêu cầu hủy đơn hàng</a></th>
                             </tr>
@@ -225,7 +225,6 @@
                     </div>
             </form>
         </div>
-    </div>
     <%@include file="/pages/footer.jsp" %>
 
     <script>

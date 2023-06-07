@@ -167,17 +167,20 @@
                                                         Admin  
                                                     </c:when>  
                                                     <c:when test="${requestScope.acc.role == 2}">  
-                                                        BTV
+                                                        Nhân viên
                                                     </c:when>
                                                     <c:when test="${requestScope.acc.role == 3}">  
                                                         Người dùng 
                                                     </c:when>  
-
+                                                    <c:when test="${acc.role == 4}">  
+                                                        Quản lý
+                                                    </c:when> 
                                                 </c:choose>
                                             </option>
                                             <option value="1">Admin</option>
-                                            <option value="2">Biên tập viên</option>
+                                            <option value="2">Nhân viên</option>
                                             <option value="3">Người dùng</option>
+                                            <option value="4">Quản lý</option>
                                         </select>
                                     </div>
                                 </div>
@@ -221,7 +224,7 @@
                                             <button <c:if test="${sessionScope.account.role =='2'}"> disabled="" </c:if> type="button" onclick="dodelete('${requestScope.acc.id}')" class="btn btn-danger">Delete</button>
                                         </c:if>
 
-                                        <button type="reset" class="btn btn-default"><a href="tbl-user">Cancel</a></button>
+                                            <a onclick="history.back()"><button class="btn btn-default">Cancel</button></a>
                                     </div>
                                 </div>
                             </div>

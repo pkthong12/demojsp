@@ -307,7 +307,9 @@
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+            })
         </script>
     </body>
 </html>

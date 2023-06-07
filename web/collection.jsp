@@ -18,7 +18,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <style>
@@ -196,7 +195,7 @@
                         <ul class="list-group category_block">
                             <a href="collection"><li style="font-weight: bold; color: red " class="list-group-item">Tất cả sản phẩm</li></a>
                                     <c:forEach items="${sessionScope.listCategory}" var="c">
-                                        <a href="collection?categoryid=${c.id}"><li class="list-group-item">${c.tenloai}</li></a>
+                                <a href="collection?categoryid=${c.id}"><li class="list-group-item">${c.tenloai}</li></a>
                                     </c:forEach>
                         </ul>
                     </div>
@@ -204,26 +203,45 @@
                         <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Khoảng giá</div>
                         <ul class="list-group category_block">
                             <li class="list-group-item">
-                                <input type="checkbox">
-                                <label class="doimau">con gà</label>
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" value="" id="flexCheckSizeLarge1" />
+                                    <label class="form-check-label" for="flexCheckSizeLarge1">
+                                        Large checkbox
+                                    </label>
+                                </div>
                             </li>
                             <li class="list-group-item">
-                                <input type="checkbox">
-                                <label>con gà</label>
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" value="" id="flexCheckSizeLarge2" />
+                                    <label class="form-check-label" for="flexCheckSizeLarge2">
+                                        Large checkbox
+                                    </label>
+                                </div>
                             </li>
                             <li class="list-group-item">
-                                <input type="checkbox">
-                                <label>con gà</label>
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" value="" id="flexCheckSizeLarge3" />
+                                    <label class="form-check-label" for="flexCheckSizeLarge3">
+                                        Large checkbox
+                                    </label>
+                                </div>
                             </li>
                             <li class="list-group-item">
-                                <input type="checkbox">
-                                <label>con gà</label>
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" value="" id="flexCheckSizeLarge4" />
+                                    <label class="form-check-label" for="flexCheckSizeLarge4">
+                                        Large checkbox
+                                    </label>
+                                </div>
                             </li>
                             <li class="list-group-item">
-                                <input type="checkbox">
-                                <label>con gà</label>
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" value="" id="flexCheckSizeLarge5" />
+                                    <label class="form-check-label" for="flexCheckSizeLarge5">
+                                        Large checkbox
+                                    </label>
+                                </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -270,7 +288,9 @@
                                     <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1">Previous</a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
                                     <li class="page-item active">
                                         <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
                                     </li>
@@ -331,6 +351,7 @@
                 if (search !== '' || search !== null) {
                     show.style.width = "200px";
                     filter = search.value.toUpperCase();
+                    alert(search.value);
                     li = document.getElementsByClassName("item");
                     for (i = 0; i < li.length; i++) {
                         a = li[i].getElementsByTagName("h5")[0];

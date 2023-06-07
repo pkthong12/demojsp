@@ -94,7 +94,7 @@
                             <div class="card mb-4">
                                 <div style="justify-content: flex-end;" class="card-body p-4 d-flex flex-row">
 
-                                    <button onclick="updatecarts()" type="button" class="btn btn-outline-warning btn-lg ms-3">Cập nhật giỏ hàng</button>
+                                    <button onclick="uctype="button" class="btn btn-outline-warning btn-lg ms-3">Cập nhật giỏ hàng</button>
                                 </div>
                             </div>
 

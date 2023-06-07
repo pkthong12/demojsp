@@ -1,15 +1,12 @@
-<%-- 
-    Document   : success
-    Created on : Mar 25, 2023, 9:45:27 PM
-    Author     : ThinkPad X1 G4
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Đặt hàng thành công</title>
+        <link REL="SHORTCUT ICON" HREF="img\icon.png">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <style type="text/css">
@@ -105,7 +102,6 @@
                             <p>Hãy theo dõi đơn hàng trong phần lịch sử mua hàng. Cám ơn bạn đã mua hàng! </p>
                             <a href="index">Tiếp tục mua hàng</a>
                         </div>
-
                     </div>
                 </div>
             </div>

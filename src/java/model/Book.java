@@ -17,8 +17,8 @@ public class Book {
     private Category category;
     private int stt, giamgia;
     private Date ngaythem;
-
-    public Book(int id, String tensach, String tacgia, String dinhdang, double trongluong, double giaban, Category category, int giamgia, int stt, String img,Date ngaythem,int soluong) {
+    private int daban;
+    public Book(int id, String tensach, String tacgia, String dinhdang, double trongluong, double giaban, Category category, int giamgia, int stt, String img,Date ngaythem,int soluong,int daban) {
         this.id = id;
         this.tensach = tensach;
         this.tacgia = tacgia;
@@ -31,6 +31,7 @@ public class Book {
         this.stt = stt;
         this.ngaythem=ngaythem;
         this.soluong=soluong;
+        this.daban=daban;
     }
 
     public int getSoluong() {
@@ -131,5 +132,14 @@ public class Book {
     public void setStt(int stt) {
         this.stt = stt;
     }
+
+    public int getDaban() {
+        return daban;
+    }
+
+    public void setDaban(int daban) {
+        this.daban = daban;
+    }
+    
 
 }

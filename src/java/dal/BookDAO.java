@@ -24,7 +24,7 @@ import model.Discount;
 public class BookDAO extends DBcontext {
 
     private static List<Carts> listcarts;
-
+    
     public List<Book> getALL() {
         List<Book> list = new ArrayList<>();
         String sql = "SELECT * FROM db_web.book ORDER BY ID DESC";
@@ -48,6 +48,7 @@ public class BookDAO extends DBcontext {
                 book.setImg(rs.getString("Image"));
                 book.setNgaythem(rs.getDate("Ngaythem"));
                 book.setSoluong(rs.getInt("Soluong"));
+                book.setDaban(GetDaBan(rs.getInt("ID")));
                 list.add(book);
             }
 
@@ -81,6 +82,7 @@ public class BookDAO extends DBcontext {
                 book.setImg(rs.getString("Image"));
                 book.setNgaythem(rs.getDate("Ngaythem"));
                 book.setSoluong(rs.getInt("Soluong"));
+                book.setDaban(GetDaBan(rs.getInt("ID")));
                 return book;
             }
             st.close();
@@ -268,9 +270,7 @@ public class BookDAO extends DBcontext {
             ps.setInt(8, stt);
             ps.setInt(9, soluong);
             ps.setString(10, img);
-
             ps.executeUpdate();
-
             return sql;
         } catch (SQLException e) {
             System.out.println(e);
@@ -284,9 +284,23 @@ public class BookDAO extends DBcontext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.executeUpdate();
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(""+e);
         }
         return false;
     }
-
+    public int GetDaBan(int BookID){
+        String sql = "select BookID, sum(soluong) as daban from db_web.order_detail group by BookID having BookID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, BookID);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getInt("daban");
+            }
+        } catch (SQLException e) {
+            System.out.println(""+e);
+        }
+        return 0;
+    }
 }

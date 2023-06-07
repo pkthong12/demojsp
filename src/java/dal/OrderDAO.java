@@ -245,7 +245,6 @@ public class OrderDAO extends DBcontext {
             } catch (SQLException e) {
             }
         }
-
     }
 
     

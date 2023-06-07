@@ -56,7 +56,7 @@
                             <p class="lead">Định dạng: ${book.dinhdang}</p>
                             <p class="lead">Trọng lượng: <fmt:formatNumber pattern="###,###" value="${book.trongluong}"/> gram</p>
                             <p class="lead">Thể loại: <a href="collection?categoryid=${book.category.id}" style="color: red; font-weight: 500;"> ${book.category.tenloai}</a></p>
-
+                            <p class="lead">Đã bán: ${book.daban}</p>
                             <div class="d-flex">
                                 <input type="hidden" class="text-center" readonly name="bookid" value="${book.id}"/>
                                 <input name="soluong" class="form-control text-center me-3" id="inputQuantity" min="1" pattern="[-+]?[0-99]" type="number" value="1" style="max-width: 5rem" />

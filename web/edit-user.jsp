@@ -238,7 +238,7 @@
                                     <th>Ngày</th>
                                     <th>Trạng thái đơn hàng</th>
                                     <th>Tổng</th>
-                                    <th>Chi tiết ${requestScope.orderdetails.size()}</th>
+                                    <th>Chi tiết </th>
                                 </tr>
                             </thead>
 

@@ -303,4 +303,18 @@ public class BookDAO extends DBcontext {
         }
         return 0;
     }
+    public int GetDaBands(int BookID){
+        String sql = "select BookID, sum(soluong) as daban from db_web.order_detail group by BookID having BookID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, BookID);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getInt("daban");
+            }
+        } catch (SQLException e) {
+            System.out.println(""+e);
+        }
+        return 0;
+    }
 }

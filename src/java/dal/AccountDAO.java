@@ -13,7 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import model.Account;
+import model.AccountForgot;
 
 /**
  *
@@ -237,7 +239,7 @@ public class AccountDAO extends DBcontext {
         return false;
     }
 
-    public void changePass(String pass, int id) {
+    public boolean changePass(String pass, int id) {
         String sql = "UPDATE `db_web`.`account` SET"
                 + "`Password` = ?"
                 + "WHERE `ID` = ?";
@@ -246,9 +248,10 @@ public class AccountDAO extends DBcontext {
             st.setString(1, pass);
             st.setInt(2, id);
             st.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
         }
+        return false;
     }
 
     public Boolean deleteAccount(int id) {
@@ -266,5 +269,23 @@ public class AccountDAO extends DBcontext {
         } catch (SQLException e) {
         }
         return false;
+    }
+    public AccountForgot fogotAccount(String mail) {
+        String sql = "SELECT ID, Email FROM db_web.account WHERE Username = ? or Email = ?" ;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, mail);
+            st.setString(2, mail);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Random rd = new Random();
+                String otpFmt = String.format("%06d", rd.nextInt(999999));
+                AccountForgot forgot = new AccountForgot(rs.getInt("ID"), rs.getString("Email"), otpFmt);
+                return forgot;
+            }
+        } catch (SQLException e) {
+            
+        }
+        return null;
     }
 }

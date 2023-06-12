@@ -6,19 +6,24 @@ package controller;
 
 import dal.AccountDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Account;
+import model.AccountForgot;
 
 /**
  *
  * @author ThinkPad X1 G4
  */
-public class ChangeServlet extends HttpServlet {
+public class NewPasswordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,6 +37,31 @@ public class ChangeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        String newPassword = request.getParameter("password");
+        String stt = request.getParameter("stt");
+        AccountForgot afg = (AccountForgot) session.getAttribute("accfg");
+        if("ok".equals(stt)){
+            AccountDAO acdao = new AccountDAO();
+            try {
+                
+                if (acdao.changePass(newPassword, afg.getID())) {
+                    session.removeAttribute("accfg");
+                    session.setAttribute("notifi", "Đổi mật khẩu thành công! Vui lòng đăng nhập lại");
+                    response.sendRedirect("login");
+                    
+                } else {
+                    request.setAttribute("status", "resetFailed");
+                    session.removeAttribute("accfg");
+                    session.setAttribute("notifi", "Đổi mật khẩu thất bại");
+                    response.sendRedirect("login");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        
 
     }
 
@@ -47,6 +77,7 @@ public class ChangeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -60,31 +91,7 @@ public class ChangeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        AccountDAO accountDAO = new AccountDAO();
-        int acid = ((Account) session.getAttribute("account")).getId();
-        String action = request.getParameter("action");
-        if ("changeinfo".equals(action)) {
-            String hoten = request.getParameter("hoten");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String email = request.getParameter("email");
-            String user = ((Account) session.getAttribute("account")).getUsername();
-            String pass = ((Account) session.getAttribute("account")).getPassword();
-            Account ac = accountDAO.changeInfo(hoten, phone, address, email, acid, user, pass);
-            session.removeAttribute("account");
-            session.setAttribute("account", ac);
-            response.sendRedirect("profile");
-        }
-        if ("changepass".equals(action)) {
-            String newpass = request.getParameter("newpass");
-            if (accountDAO.changePass(newpass, acid)) {
-                session.setAttribute("notifi", "Đổi mật khẩu thành công, vui lòng đăng nhập lại");
-                session.removeAttribute("account");
-                response.sendRedirect("login");
-            }
-        }
-
+        processRequest(request, response);
     }
 
     /**

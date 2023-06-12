@@ -31,7 +31,7 @@ import model.Discount;
 public class CheckoutServlet extends HttpServlet {
 
     static HashMap<Book, Integer> out = new HashMap<>();
-
+    private List<Discount> listdiscode;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -82,6 +82,9 @@ public class CheckoutServlet extends HttpServlet {
             }
         }
         request.setAttribute("code", out);
+        WebDAO wdao = new WebDAO();
+        listdiscode = wdao.getAllDis();
+        request.setAttribute("discountcode", wdao.getAllDis());
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 
@@ -110,7 +113,7 @@ public class CheckoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         double giamgia = 0;
         if (!"".equals(magg)) {
-            List<Discount> listdis = (List<Discount>) session.getAttribute("discountcode");
+            List<Discount> listdis = listdiscode;//(List<Discount>) session.getAttribute("discountcode");
             for (Discount dis : listdis) {
                 if (dis.getMagg().equals(magg.toUpperCase())) {
                     giamgia = dis.getRate();

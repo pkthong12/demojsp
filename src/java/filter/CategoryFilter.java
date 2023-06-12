@@ -115,16 +115,15 @@ public class CategoryFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         WebDAO wdao = new WebDAO();
-        if(wdao.getStatusWeb()==0){
+        if (wdao.getStatusWeb() == 0) {
             HttpServletResponse res = (HttpServletResponse) response;
             req.getRequestDispatcher("maintenance.jsp").forward(req, res);
         }
-        if (session.getAttribute("listCategory") == null) {
-            CategoryDAO categoryDAO = new CategoryDAO();
-            List<Category> listCategory = categoryDAO.getALL();
-            session.setAttribute("listCategory", listCategory);
-            session.setAttribute("configs", wdao.getConfig());
-        }
+        CategoryDAO categoryDAO = new CategoryDAO();
+        List<Category> listCategory = categoryDAO.getALL();
+        session.setAttribute("listCategory", listCategory);
+        session.setAttribute("configs", wdao.getConfig());
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);

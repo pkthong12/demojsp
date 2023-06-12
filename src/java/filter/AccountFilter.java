@@ -4,9 +4,6 @@
  */
 package filter;
 
-import dal.AccountDAO;
-import dal.BookDAO;
-import dal.CategoryDAO;
 import dal.WebDAO;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -21,14 +18,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import model.Account;
-import model.Book;
-import model.Carts;
-import model.Category;
 import model.Discount;
 import model.MethodPayment;
 

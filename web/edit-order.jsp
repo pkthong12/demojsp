@@ -125,7 +125,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="3">Tạm tính</td>
-                                                        <td><fmt:formatNumber pattern="###,###" value="${requestScope.order.totalFirst}"/>đ</td>
+                                                        <td><fmt:formatNumber pattern="###,###" value="${requestScope.order.totalFirst+requestScope.order.phiship}"/>đ</td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="3">Giảm giá</td>

@@ -83,15 +83,17 @@ public class ConfigsWebServlet extends HttpServlet {
         String instagram = request.getParameter("instagram");
         WebDAO wdao = new WebDAO();
 
-        wdao.configWeb(tenweb, diachiduong, diachithanhpho, phone, email, facebook, zalo, instagram);
-        Configs fiConfigs = new Configs("1", tenweb, facebook, email, phone, diachiduong, instagram, diachithanhpho, zalo);
-        HttpSession session = request.getSession();
-        int accId = ((Account) session.getAttribute("account")).getId();
-        String user = ((Account) session.getAttribute("account")).getUsername();
-        wdao.addHistory(accId, user + " đã cập nhật thông tin web");
-        session.removeAttribute("configs");
-        session.setAttribute("configs", fiConfigs);
-        response.sendRedirect("configs");
+        if (wdao.configWeb(tenweb, diachiduong, diachithanhpho, phone, email, facebook, zalo, instagram)) {
+            Configs fiConfigs = new Configs("1", tenweb, facebook, email, phone, diachiduong, instagram, diachithanhpho, zalo);
+            HttpSession session = request.getSession();
+            int accId = ((Account) session.getAttribute("account")).getId();
+            String user = ((Account) session.getAttribute("account")).getUsername();
+            wdao.addHistory(accId, user + " đã cập nhật thông tin web");
+            session.removeAttribute("configs");
+            session.setAttribute("configs", fiConfigs);
+            response.sendRedirect("configs");
+        }
+
     }
 
     /**

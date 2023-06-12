@@ -4,21 +4,25 @@
  */
 package controller;
 
-import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Account;
+import model.AccountForgot;
 
 /**
  *
  * @author ThinkPad X1 G4
  */
-public class ChangeServlet extends HttpServlet {
+public class ValidateOTPServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,6 +51,7 @@ public class ChangeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -60,31 +65,21 @@ public class ChangeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String value = request.getParameter("otp");
         HttpSession session = request.getSession();
-        AccountDAO accountDAO = new AccountDAO();
-        int acid = ((Account) session.getAttribute("account")).getId();
-        String action = request.getParameter("action");
-        if ("changeinfo".equals(action)) {
-            String hoten = request.getParameter("hoten");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String email = request.getParameter("email");
-            String user = ((Account) session.getAttribute("account")).getUsername();
-            String pass = ((Account) session.getAttribute("account")).getPassword();
-            Account ac = accountDAO.changeInfo(hoten, phone, address, email, acid, user, pass);
-            session.removeAttribute("account");
-            session.setAttribute("account", ac);
-            response.sendRedirect("profile");
-        }
-        if ("changepass".equals(action)) {
-            String newpass = request.getParameter("newpass");
-            if (accountDAO.changePass(newpass, acid)) {
-                session.setAttribute("notifi", "Đổi mật khẩu thành công, vui lòng đăng nhập lại");
-                session.removeAttribute("account");
-                response.sendRedirect("login");
+        AccountForgot afg = (AccountForgot) session.getAttribute("accfg");
+        try {
+            int otp = Integer.parseInt(value);
+            int code = Integer.parseInt(afg.getCode());
+            if (otp == code) {
+                request.setAttribute("status", "ok");
+                request.getRequestDispatcher("newPassword.jsp").forward(request, response);
             }
-        }
+        } catch (ServletException | IOException | NumberFormatException e) {
 
+        }
+        request.setAttribute("message", "wrong otp");
+        request.getRequestDispatcher("EnterOtp.jsp").forward(request, response);
     }
 
     /**

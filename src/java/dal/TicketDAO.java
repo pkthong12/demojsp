@@ -69,6 +69,23 @@ public class TicketDAO extends DBcontext {
 
     }
 
+    public boolean rqcancelOrder(int orderID) {
+        String sql = "UPDATE `db_web`.`ordercart` "
+                + "SET "
+                + "`Stt` = 6 "
+                + "WHERE `ID` = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, orderID);
+            st.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+
+    }
+    
     public void refundedOrder() {
 
     }

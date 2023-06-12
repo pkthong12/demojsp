@@ -351,7 +351,6 @@
                 if (search !== '' || search !== null) {
                     show.style.width = "200px";
                     filter = search.value.toUpperCase();
-                    alert(search.value);
                     li = document.getElementsByClassName("item");
                     for (i = 0; i < li.length; i++) {
                         a = li[i].getElementsByTagName("h5")[0];

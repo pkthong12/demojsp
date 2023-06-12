@@ -86,8 +86,8 @@ public class WebDAO extends DBcontext {
         return null;
     }
 
-    public Configs configWeb(String tenweb, String diachiduong, String diachithanhpho, String phone, String email, String facebook, String zalo, String insta) {
-        String sql = "UPDATE `db_web`.`configsweb`"
+    public boolean configWeb(String tenweb, String diachiduong, String diachithanhpho, String phone, String email, String facebook, String zalo, String insta) {
+        String sql = "UPDATE `db_web`.`configsweb` "
                 + "SET"
                 + "`Tenweb` = ?,"
                 + "`DiachiDuong` = ?,"
@@ -97,7 +97,7 @@ public class WebDAO extends DBcontext {
                 + "`Facebook` = ?,"
                 + "`Zalo` = ? ,"
                 + "`Instagram` = ?"
-                + "WHERE `ID` = ?";
+                + " WHERE `ID` = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, tenweb);
@@ -108,11 +108,11 @@ public class WebDAO extends DBcontext {
             st.setString(6, facebook);
             st.setString(7, zalo);
             st.setString(8, insta);
-
             st.executeUpdate();
+            return true;
         } catch (SQLException e) {
         }
-        return null;
+        return false;
     }
 
     public List<HistoryWeb> getHistory() {

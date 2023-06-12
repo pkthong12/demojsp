@@ -342,7 +342,7 @@
                                                         ship = 35000;
                                                     }
                                                     $("#phiship").val(ship);
-                                                    totalfirst = (total + ship);
+                                                    //totalfirst = (total + ship);
                                                     total = (total + ship) - (total + ship) * discount / 100;
 
                                                     document.getElementById("ship").innerHTML = VND.format(ship);
@@ -401,7 +401,7 @@
                                                 const show = document.querySelector('#noti');
 
                                                 var magg = document.getElementById("magg").value.toUpperCase();
-        <c:forEach items="${sessionScope.discountcode}" var="code">
+                                            <c:forEach items="${requestScope.discountcode}" var="code">
                                                 if (magg === '${code.magg.toUpperCase()}') {
                                                     noti = "Áp thành công mã giảm giá " +${code.rate} + "%";
                                                     discount = ${code.rate};

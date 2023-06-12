@@ -17,10 +17,6 @@
         <filter-class>filter.AdminFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>CheckoutFilter</filter-name>
-        <filter-class>filter.CheckoutFilter</filter-class>
-    </filter>
-    <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>filter.LoginFilter</filter-class>
     </filter>
@@ -31,10 +27,6 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <servlet-name>LoginServlet</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CheckoutFilter</filter-name>
-        <url-pattern>/checkout</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AccountFilter</filter-name>
@@ -177,6 +169,18 @@
         <servlet-name>ExportServlet</servlet-name>
         <servlet-class>controller.ExportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgotPassServlet</servlet-name>
+        <servlet-class>controller.ForgotPassServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewPasswordServlet</servlet-name>
+        <servlet-class>controller.NewPasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidateOTPServlet</servlet-name>
+        <servlet-class>controller.ValidateOTPServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/auth</url-pattern>
@@ -280,6 +284,18 @@
     <servlet-mapping>
         <servlet-name>ExportServlet</servlet-name>
         <url-pattern>/export/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassServlet</servlet-name>
+        <url-pattern>/fogotPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewPasswordServlet</servlet-name>
+        <url-pattern>/newPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidateOTPServlet</servlet-name>
+        <url-pattern>/ValidateOtp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

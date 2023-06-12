@@ -76,7 +76,7 @@
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4">Bình luận</h2>
-                <div  class="fb-comments" data-href="https://www.facebook.com/permalink.php?story_fbid=3350950245221293&id=100084687950939&substory_index=3350950245221293"  data-numposts="5"></div>
+                <div  class="fb-comments" data-href="https://phungkimthong.online/${book.id}"  data-numposts="5"></div>
             </div>
         </section>
         <!-- Related items section-->

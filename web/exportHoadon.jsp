@@ -87,7 +87,7 @@
                                                     <c:forEach var="detail" items="${requestScope.listdetail}">
                                                         <c:if test="${detail.orderID == order.ID}">
                                                             <tr>
-                                                                <td style="width: 60%; border-right: 2px dotted;border-top: 2px dotted; color: #d51c24 " class="bo-bot">${detail.tensach}</td>
+                                                                <td style="width: 60%; border-right: 2px dotted;border-top: 2px dotted; color: #d51c24 " class="bo-bot">${detail.sach.tensach}</td>
                                                                 <td style="border-right: 2px dotted;border-top: 2px dotted " class="bo-bot"><fmt:formatNumber pattern="###,###" value="${detail.giaban}"/>đ</td>
                                                                 <td style="border-right: 2px dotted;border-top: 2px dotted " class="bo-bot">${detail.soluong}</td>
                                                                 <td style="border-top: 2px dotted" class="bo-bot"><fmt:formatNumber pattern="###,###" value="${detail.thanhtien}"/>đ</td>

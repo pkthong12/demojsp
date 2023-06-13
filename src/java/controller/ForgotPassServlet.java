@@ -45,10 +45,6 @@ public class ForgotPassServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String email = request.getParameter("email");
             RequestDispatcher dispatcher = null;
-//            int otpvalue = 0;
-//            Random rand = new Random();
-//            otpvalue = rand.nextInt(999999);
-//            String otpFmt = String.format("%06d", otpvalue);
             HttpSession mySession = request.getSession();
             AccountDAO adao = new AccountDAO();
             AccountForgot afg = adao.fogotAccount(email);
@@ -84,8 +80,6 @@ public class ForgotPassServlet extends HttpServlet {
                     }
                     dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
                     request.setAttribute("message", "Vui lòng kiểm tra mail "+ afg.getMail()+" của bạn");
-//                    mySession.setAttribute("otp", otpFmt);
-//                    mySession.setAttribute("email", email);
                     mySession.setAttribute("accfg", afg);
                     dispatcher.forward(request, response);
                 }

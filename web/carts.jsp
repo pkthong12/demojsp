@@ -124,7 +124,7 @@
                 }
             }
             if (result === "0thdzvkl0") {
-                alert("cuối đầu bài");
+                alert("Chưa chọn sản phẩm cần thanh toán");
             } else {
                 window.location = "checkout?order=" + result;
             }

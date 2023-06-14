@@ -154,7 +154,7 @@ public class CheckoutServlet extends HttpServlet {
                 BookDAO bk = new BookDAO();
                 List<Carts> carts = bk.getBookByCarts(accId);
                 session.setAttribute("giohang", carts);
-                response.sendRedirect("success.jsp");
+                response.sendRedirect("success");
                 
             }
         } catch (IOException | NumberFormatException e) {

@@ -71,7 +71,7 @@
                                                     <i class="fas fa-minus"></i>
                                                 </button>
 
-                                                <input id="form1" min="1" name="quantity" value="${giohang.soluong}" type="number"
+                                                <input id="form1" min="1" max="${book.book.soluong}" name="quantity" value="${giohang.soluong}" type="number"
                                                        class="form-control form-control-sm text-center" />
 
                                                 <button class="btn btn-link px-2"
@@ -94,7 +94,7 @@
                             <div class="card mb-4">
                                 <div style="justify-content: flex-end;" class="card-body p-4 d-flex flex-row">
 
-                                    <button onclick="uctype="button" class="btn btn-outline-warning btn-lg ms-3">Cập nhật giỏ hàng</button>
+                                    <button onclick="updatecarts()" type="button" class="btn btn-outline-warning btn-lg ms-3">Cập nhật giỏ hàng</button>
                                 </div>
                             </div>
 
@@ -128,15 +128,16 @@
             } else {
                 window.location = "checkout?order=" + result;
             }
-        }
+        };
+        
         function updatecarts() {
             var checkbox = document.getElementsByName('select');
             var quantity = document.getElementsByName('quantity');
-            var result = "0:0";
+            var cc = "0:0";
             for (var i = 0; i < checkbox.length; i++) {
-                result += ',' + checkbox[i].value + ':' + quantity[i].value;
+                cc += ',' + checkbox[i].value + ':' + quantity[i].value;
             }
-            window.location = "updatecarts?sql=" + result;
+            window.location = "updatecarts?sql=" + cc;
         }
         
 

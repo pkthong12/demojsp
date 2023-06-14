@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : Feb 23, 2023, 10:08:23 PM
-    Author     : ThinkPad X1 G4
+Document   : index
+Created on : Feb 23, 2023, 10:08:23 PM
+Author     : ThinkPad X1 G4
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,8 +63,7 @@
                                     <input type="text" name="address" required="" class="form-control" value="${sessionScope.account.diachi}">
                                 </div> 
                                 <div class="col-md-12">
-                                    <label class="labels">Email</label>
-                                    <input type="text" name="email" required=""class="form-control"  value="${sessionScope.account.email}">
+                                    <input type="hidden" name="email" required=""class="form-control"  value="${sessionScope.account.email}">
                                 </div>  
                             </div> 
 
@@ -81,7 +80,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3"> 
                         <h4 class="text-right">Đổi mật khẩu</h4> 
                     </div>
-                    <form name="changepass" action="change" method="post" onsubmit="return kiemtra()">
+                    <form action="change" method="post" onsubmit="return kiemtra()">
                         <div class="row mt-3"> 
                             <div class="col-md-12">
                                 <label class="labels">Mật khẩu cũ</label>
@@ -89,11 +88,11 @@
                             </div> 
                             <div class="col-md-12">
                                 <label class="labels">Mật khẩu mới</label>
-                                <input type="password" name="newpass" required=""class="form-control" value="">
+                                <input type="password" id="p1" name="newpass" required=""class="form-control" value="">
                             </div> 
                             <div class="col-md-12">
                                 <label class="labels">Nhập lại mật khẩu mới</label>
-                                <input type="password" name="repass" required=""class="form-control"  value="">
+                                <input type="password" id="p2" name="repass" required=""class="form-control"  value="">
                             </div> 
                             <div class="mt-5 text-center">
                                 <input class="btn btn-primary profile-button" type="hidden" name="action" value="changepass"/>
@@ -110,20 +109,7 @@
 <%@include file="/pages/footer.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-                        function kiemtra() {
-                            var olderpass = document.changepass.olderpass.value;
-                            var newpass = document.changepass.newpass.value;
-                            var repass = document.changepass.repass.value;
 
-
-                                if (newpass !== repass) {
-                                    window.alert("Mật khẩu nhập lại khác mật khẩu mới");
-                                    return false;
-                                }
-//                            }
-
-                            return true;
-                        }
                         const input = document.getElementById('anhinput');
                         const image = document.getElementById('anhshow');
 
@@ -135,13 +121,30 @@
                         });
 
 </script>
+<script type="text/javascript">
+                        function kiemtra() {
+                            var newpass = document.getElementById("p1").value;
+                            var repass = document.getElementById("p2").value;
+
+                            if (newpass.length < 5) {
+                                window.alert("Mật khẩu phải đủ 5 ký tự trở lên!");
+                                return false;
+                            } else if (newpass !== repass) {
+                                window.alert("Mật khẩu nhập lại khác mật khẩu mới");
+                                return false;
+                            }
+                            return true;
+
+                        }
+                        ;
+</script>
 <c:if test="${sessionScope.notifi != null}">
-        <script>
-            window.alert("${sessionScope.notifi}");
-            <% 
-                session.removeAttribute("notifi");
-            %>
-        </script>
-    </c:if>
+    <script>
+        window.alert("${sessionScope.notifi}");
+        <% 
+            session.removeAttribute("notifi");
+        %>
+    </script>
+</c:if>
 </body>
 </html>

@@ -246,8 +246,8 @@
                     </div>
                 </div>
                 <div class="col">
+                    <h4 style="margin-bottom: 3%">${requestScope.loai}</h4>
                     <div class="row">
-                        <h4 style="margin-bottom: 3%">${requestScope.loai}</h4>
 
                         <h1 id="noti" style="<c:if test="${ requestScope.listbookID.size()!=0}">display: none </c:if>">Không có kết quả nào</h1>
 
@@ -371,7 +371,7 @@
 
             }
         </script>
-
+        
         <%@include file="/pages/footer.jsp" %>
     </body>
 </html>

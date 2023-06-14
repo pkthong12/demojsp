@@ -6,6 +6,7 @@ package filter;
 
 import dal.BookDAO;
 import dal.CategoryDAO;
+import dal.WebDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Book;
 import model.Category;
@@ -113,7 +115,22 @@ public class BookFilter implements Filter {
         HttpSession session = req.getSession();
         BookDAO bookDAO = new BookDAO();
         List<Book> listBook = bookDAO.getALL();
+        HttpServletResponse res = (HttpServletResponse) response;
+        WebDAO wdao = new WebDAO();
+        if (wdao.getStatusWeb() == 0) {
+            
+            req.getRequestDispatcher("maintenance.jsp").forward(req, res);
+        }
+        String url = req.getServletPath();
+        if(url.endsWith(".jsp")){
+            res.sendRedirect("404");
+        }
+        CategoryDAO categoryDAO = new CategoryDAO();
+        List<Category> listCategory = categoryDAO.getALL();
+        session.setAttribute("listCategory", listCategory);
+        session.setAttribute("configs", wdao.getConfig());
         session.setAttribute("listBook", listBook);
+        
         Throwable problem = null;
         try {
             chain.doFilter(request, response);

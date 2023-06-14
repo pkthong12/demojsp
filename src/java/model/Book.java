@@ -10,7 +10,7 @@ import java.sql.Date;
  *
  * @author ThinkPad X1 G4
  */
-public class Book {
+public class Book{
     private int id,soluong;
     private String tensach, tacgia, dinhdang, img;
     private double trongluong, giaban;
@@ -140,6 +140,8 @@ public class Book {
     public void setDaban(int daban) {
         this.daban = daban;
     }
+
+
     
 
 }

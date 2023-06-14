@@ -59,7 +59,7 @@
                             <p class="lead">Đã bán: ${book.daban}</p>
                             <div class="d-flex">
                                 <input type="hidden" class="text-center" readonly name="bookid" value="${book.id}"/>
-                                <input name="soluong" class="form-control text-center me-3" id="inputQuantity" min="1" pattern="[-+]?[0-99]" type="number" value="1" style="max-width: 5rem" />
+                                <input name="soluong" class="form-control text-center me-3" id="inputQuantity" min="1" max="${book.soluong}" pattern="[-+]?[0-99]" type="number" value="1" style="max-width: 5rem" />
                                 <c:if test="${book.soluong > 2&&book.stt==5}">
                                     <input value="Thêm vào giỏ hàng"  class="btn btn-outline-dark flex-shrink-0" type="submit"/>
                                 </c:if>

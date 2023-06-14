@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <filter>
-        <filter-name>AllFilter</filter-name>
-        <filter-class>filter.CategoryFilter</filter-class>
-    </filter>
-    <filter>
         <filter-name>AccountFilter</filter-name>
         <filter-class>filter.AccountFilter</filter-class>
     </filter>
@@ -40,6 +36,7 @@
         <url-pattern>/change</url-pattern>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/order-detail</url-pattern>
+        <url-pattern>/success</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
@@ -47,18 +44,16 @@
         <url-pattern>/tbl-user</url-pattern>
         <url-pattern>/tbl-product</url-pattern>
         <url-pattern>/tbl-order</url-pattern>
+        <url-pattern>/tbl-category</url-pattern>
         <url-pattern>/update-order</url-pattern>
         <url-pattern>/configs</url-pattern>
         <url-pattern>/delete</url-pattern>
         <url-pattern>/edit-user</url-pattern>
         <url-pattern>/edit-product</url-pattern>
+        <url-pattern>/edit-category</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>BookFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>AllFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <servlet>
@@ -181,6 +176,22 @@
         <servlet-name>ValidateOTPServlet</servlet-name>
         <servlet-class>controller.ValidateOTPServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>controller.ErrorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Success</servlet-name>
+        <servlet-class>client.Success</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TableCategoryServlet</servlet-name>
+        <servlet-class>admin.TableCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCategoryServlet</servlet-name>
+        <servlet-class>admin.EditCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/auth</url-pattern>
@@ -296,6 +307,22 @@
     <servlet-mapping>
         <servlet-name>ValidateOTPServlet</servlet-name>
         <url-pattern>/ValidateOtp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/404</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Success</servlet-name>
+        <url-pattern>/success</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TableCategoryServlet</servlet-name>
+        <url-pattern>/tbl-category/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCategoryServlet</servlet-name>
+        <url-pattern>/edit-category</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

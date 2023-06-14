@@ -46,5 +46,28 @@ public class CategoryDAO extends DBcontext {
         }
         return null;
     }
+    public boolean addCategory(String tenloai){
+        String query = "INSERT INTO `db_web`.`category` (`Tenloai`) VALUES (?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, tenloai);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    public boolean updateCategory(int id,String tenloai){
+        String query = "UPDATE `db_web`.`category` SET `Tenloai` = ? WHERE `ID` = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, tenloai);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
     
 }

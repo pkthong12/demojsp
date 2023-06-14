@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
         String usernameLogin = request.getParameter("usernameLogin");
         String passwordLogin = request.getParameter("passwordLogin");
         AccountDAO accountDAO = new AccountDAO();
-        Account acc = accountDAO.checkLogin(usernameLogin, passwordLogin);
+        Account acc = accountDAO.checkLogin(usernameLogin, accountDAO.toSHA1(passwordLogin));
         HttpSession session = request.getSession();
         if (acc != null) {
             int stt = acc.getStt();

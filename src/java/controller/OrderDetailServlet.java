@@ -21,7 +21,7 @@ import model.Account;
  */
 public class OrderDetailServlet extends HttpServlet {
 
-    private final String error = "/endjava/404.jsp";
+    private final String error = "/endjava/404";
     private final String rqcancelorder = "";
     private int accId, orderid;
     String path;
@@ -66,7 +66,7 @@ public class OrderDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         String orderid_raw = request.getParameter("order");
         if (orderid_raw == null) {
-            response.sendRedirect("404.jsp");
+            response.sendRedirect("404");
         }
 
         try {
@@ -75,7 +75,7 @@ public class OrderDetailServlet extends HttpServlet {
             orderid = Integer.parseInt(orderid_raw);
             OrderDAO ordao = new OrderDAO();
             if (ordao.getOrderDetailForUser(orderid, accId).isEmpty()) {
-                response.sendRedirect("404.jsp");
+                response.sendRedirect("404");
             } else {
                 request.setAttribute("order", ordao.getOrderByID(orderid));
                 request.setAttribute("listdetail", ordao.getOrderDetailForUser(orderid, accId));
@@ -106,7 +106,7 @@ public class OrderDetailServlet extends HttpServlet {
                 requestCancelOrder(request, response);
                 break;
             default:
-                request.getRequestDispatcher("404.jsp").forward(request, response);
+                request.getRequestDispatcher("404").forward(request, response);
                 break;
         }
 

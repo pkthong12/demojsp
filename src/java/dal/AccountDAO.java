@@ -66,13 +66,13 @@ public class AccountDAO extends DBcontext {
     }
 
     public Account checkLogin(String user, String pass) {
-        String sql = "SELECT * FROM db_web.Account where username =? and password=? or email =?and password=?";
+        String sql = "SELECT * FROM db_web.Account where username =? and password=? or email =? and password=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
-            st.setString(2, toSHA1(pass));
+            st.setString(2, pass);
             st.setString(3, user);
-            st.setString(4, toSHA1(pass));
+            st.setString(4, pass);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 Account acc = new Account(rs.getInt("ID"),
@@ -182,12 +182,12 @@ public class AccountDAO extends DBcontext {
 
     //
     public Account changeInfo(String hoten, String phone, String address, String email, int id, String user, String pass) {
-        String sql = "UPDATE `db_web`.`account` SET"
+        String sql = "UPDATE `db_web`.`account` SET "
                 + "`Hoten` = ?,"
                 + "`Diachi` = ?,"
                 + "`Phone` = ?,"
                 + "`Email` = ?"
-                + "WHERE `ID` = ?";
+                + " WHERE `ID` = ?";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -197,10 +197,10 @@ public class AccountDAO extends DBcontext {
             st.setString(4, email);
             st.setInt(5, id);
             st.executeUpdate();
-
+            return checkExitsAcc(user, email);
         } catch (SQLException e) {
         }
-        return checkLogin(user, pass);
+        return null;
     }
 
     public Account getAccbyID(int id) {

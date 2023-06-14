@@ -84,7 +84,7 @@ public class ExportServlet extends HttpServlet {
                     int orderid = Integer.parseInt(id_raw);
                     OrderDAO ordao = new OrderDAO();
                     if (ordao.getOrderDetailForAdmin(orderid).isEmpty()) {
-                        response.sendRedirect("404.jsp");
+                        response.sendRedirect("404");
                     } else {
                         lorder.add(ordao.getOrderByID(orderid));
                         ldetail.addAll(ordao.getOrderDetailForAdmin(orderid));
@@ -98,7 +98,7 @@ public class ExportServlet extends HttpServlet {
         request.setAttribute("listdetail", ldetail);
         request.getRequestDispatcher("/exportHoadon.jsp").forward(request, response);
         }else{
-            response.sendRedirect("/endjava/404.jsp");
+            response.sendRedirect("/endjava/404");
         }
     }
 

@@ -146,14 +146,16 @@
                                                                                                           border-radius: 5px;" class="form-select" id="newField1" name="stt">
                                                         <option selected="" value="${requestScope.order.status.ID}">${requestScope.order.status.mota}</option>
                                                     <c:forEach items="${requestScope.orderstt}" var="stt">
-                                                        <option value="${stt.ID}">${stt.mota}</option>
+                                                        <c:if test="${stt.ID != 8&&stt.ID !=9}">
+                                                            <option value="${stt.ID}">${stt.mota}</option>
+                                                        </c:if>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                             <div <c:if test="${requestScope.order.status.ID == 7}"> style="display: none"</c:if> class="d-grid">
-                                                <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Cập nhật</button>
-                                                <button class="btn btn-primary btn-lg" id="submitButton" onclick="change()" type="button">Yêu cầu cập nhật thông tin</button>
-                                                <a type="button" href="export/hoadon?id=${requestScope.order.ID}"class="btn btn-success btn-lg" id="btn-export" >Xuất hóa đơn</a>
+                                                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Cập nhật</button>
+                                                    <button class="btn btn-primary btn-lg" id="submitButton" onclick="change()" type="button">Yêu cầu cập nhật thông tin</button>
+                                                    <a type="button" href="export/hoadon?id=${requestScope.order.ID}"class="btn btn-success btn-lg" id="btn-export" >Xuất hóa đơn</a>
                                             </div>
                                         </form>
                                     </div>

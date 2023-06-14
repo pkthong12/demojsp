@@ -343,7 +343,7 @@
                                                     }
                                                     $("#phiship").val(ship);
                                                     //totalfirst = (total + ship);
-                                                    total = (total + ship) - (total + ship) * discount / 100;
+                                                    total = (totalfirst + ship) - (totalfirst + ship) * discount / 100;
 
                                                     document.getElementById("ship").innerHTML = VND.format(ship);
                                                     document.getElementById("total").innerHTML = VND.format(total);

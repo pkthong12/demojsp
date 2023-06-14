@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -113,28 +114,34 @@
                             var olderpass = document.changepass.olderpass.value;
                             var newpass = document.changepass.newpass.value;
                             var repass = document.changepass.repass.value;
-                            if (olderpass !== "${sessionScope.account.password}") {
-                                window.alert("Mật khẩu cũ sai");
-                                return false;
-                            } else {
+
+
                                 if (newpass !== repass) {
                                     window.alert("Mật khẩu nhập lại khác mật khẩu mới");
                                     return false;
                                 }
-                            }
+//                            }
 
                             return true;
                         }
-const input = document.getElementById('anhinput');
-            const image = document.getElementById('anhshow');
+                        const input = document.getElementById('anhinput');
+                        const image = document.getElementById('anhshow');
 
-            input.addEventListener('change', (e) => {
-                if (e.target.files.length) {
-                    const src = URL.createObjectURL(e.target.files[0]);
-                    image.src = src;
-                }
-            });
+                        input.addEventListener('change', (e) => {
+                            if (e.target.files.length) {
+                                const src = URL.createObjectURL(e.target.files[0]);
+                                image.src = src;
+                            }
+                        });
 
 </script>
+<c:if test="${sessionScope.notifi != null}">
+        <script>
+            window.alert("${sessionScope.notifi}");
+            <% 
+                session.removeAttribute("notifi");
+            %>
+        </script>
+    </c:if>
 </body>
 </html>

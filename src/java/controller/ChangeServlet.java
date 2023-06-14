@@ -63,6 +63,7 @@ public class ChangeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AccountDAO accountDAO = new AccountDAO();
         int acid = ((Account) session.getAttribute("account")).getId();
+
         String action = request.getParameter("action");
         if ("changeinfo".equals(action)) {
             String hoten = request.getParameter("hoten");
@@ -78,11 +79,19 @@ public class ChangeServlet extends HttpServlet {
         }
         if ("changepass".equals(action)) {
             String newpass = request.getParameter("newpass");
-            if (accountDAO.changePass(newpass, acid)) {
-                session.setAttribute("notifi", "Đổi mật khẩu thành công, vui lòng đăng nhập lại");
-                session.removeAttribute("account");
-                response.sendRedirect("login");
+            String olderpass = request.getParameter("olderpass");
+            String passw = ((Account) session.getAttribute("account")).getPassword();
+            if (accountDAO.toSHA1(olderpass).equals(passw)) {
+                if (accountDAO.changePass(newpass, acid)) {
+                    session.setAttribute("notifi", "Đổi mật khẩu thành công, vui lòng đăng nhập lại");
+                    session.removeAttribute("account");
+                    response.sendRedirect("login");
+                }
+            } else {
+                session.setAttribute("notifi", "Mật khẩu cũ không chính xác!");
+                response.sendRedirect("profile");
             }
+
         }
 
     }

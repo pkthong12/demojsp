@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Random;
 import model.Account;
 import model.AccountForgot;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  *
@@ -56,7 +58,7 @@ public class AccountDAO extends DBcontext {
         List<Account> lacc = new ArrayList<>();
         for (Account acc : getALL()) {
             String[] arr = acc.getTimeCreate().split(" ");
-            if(arr[0].replace("-", "/").equals(dateNowString)){
+            if (arr[0].replace("-", "/").equals(dateNowString)) {
                 lacc.add(acc);
             }
         }
@@ -68,9 +70,9 @@ public class AccountDAO extends DBcontext {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
-            st.setString(2, pass);
+            st.setString(2, toSHA1(pass));
             st.setString(3, user);
-            st.setString(4, pass);
+            st.setString(4, toSHA1(pass));
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 Account acc = new Account(rs.getInt("ID"),
@@ -139,7 +141,7 @@ public class AccountDAO extends DBcontext {
             DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String dateString = df.format(date);
             ps.setString(1, user);
-            ps.setString(2, pass);
+            ps.setString(2, toSHA1(pass));
             ps.setString(3, hoten);
             ps.setString(4, diachi);
             ps.setString(5, phone);
@@ -245,7 +247,7 @@ public class AccountDAO extends DBcontext {
                 + "WHERE `ID` = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, pass);
+            st.setString(1, toSHA1(pass));
             st.setInt(2, id);
             st.executeUpdate();
             return true;
@@ -270,8 +272,9 @@ public class AccountDAO extends DBcontext {
         }
         return false;
     }
+
     public AccountForgot fogotAccount(String mail) {
-        String sql = "SELECT ID, Email FROM db_web.account WHERE Username = ? or Email = ?" ;
+        String sql = "SELECT ID, Email FROM db_web.account WHERE Username = ? or Email = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, mail);
@@ -284,8 +287,23 @@ public class AccountDAO extends DBcontext {
                 return forgot;
             }
         } catch (SQLException e) {
-            
+
         }
         return null;
     }
+
+    public String toSHA1(String str) {
+        String salt = "asjrlkmcoewj@tjle;oxqskjhdjksjf1jurVn";// Làm cho mật khẩu phức tap
+        String result = null;
+        str = str + salt;
+        try {
+            byte[] dataBytes = str.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            result = Base64.encodeBase64String(md.digest(dataBytes));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
